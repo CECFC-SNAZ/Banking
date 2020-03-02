@@ -11,19 +11,19 @@ const bool debug = false;
 
 Transaction::Transaction() {
 	transType = Transaction::Type::Deposit;
-	transTime = 0;
+	transTime = { 0,0,0,0,0,0 };
 	transAmount = -17;
 	accountID = -13;
 }
 
-Transaction::Transaction(Type type, time_t timeIn, double amount, int ID) {
+Transaction::Transaction(Type type, timeStruct timeIn, double amount, int ID) {
 	transType = type;
 	transTime = timeIn;
 	transAmount = amount;
 	accountID = ID;
 }
 
-bool Transaction::setTransaction(Type type, time_t timeIn, double amount, int ID) {
+bool Transaction::setTransaction(Type type, timeStruct timeIn, double amount, int ID) {
 	try {
 		if (amount <= 0) throw(1);
 		if (ID <= 0) throw(2);
@@ -80,4 +80,26 @@ bool Transaction::setAcctID(int ID) {
 		if (debug) cout << "\nUnknown Error\n";
 		return false;
 	}
+}
+
+void Transaction::readFromFile(fstream& fileIn) {
+	fileIn.read(reinterpret_cast<char*>(this), sizeof(this));
+}
+
+void Transaction::readFromFile(ifstream& fileIn) {
+	fileIn.read(reinterpret_cast<char*>(this), sizeof(this));
+}
+
+bool Transaction::storeInFile(fstream& fileIn) {
+	bool didFileExist = false;
+	if (fileIn) didFileExist = true;
+	fileIn.write(reinterpret_cast<char*>(this), sizeof(this));
+	return didFileExist;
+}
+
+bool Transaction::storeInFile(ofstream& fileIn) {
+	bool didFileExist = false;
+	if (fileIn) didFileExist = true;
+	fileIn.write(reinterpret_cast<char*>(this), sizeof(this));
+	return didFileExist;
 }
