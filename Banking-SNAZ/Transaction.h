@@ -28,10 +28,10 @@ public:
 	bool setTransaction(Type, timeStruct, double, int); // Returns false in the case of an error, otherwise returns true 
 	bool setAmount(double);                             // ^
 	bool setAcctID(int);                                // ^
-	bool readFromFile(fstream);                         // ^
-	bool readFromFile(ifstream);                        // ^
-	bool storeInFile(fstream);                          // Returns true if file already existed, returns false if not
-	bool storeInFile(ofstream);                         // ^
+	void readFromFile(fstream&);
+	void readFromFile(ifstream&);
+	bool storeInFile(fstream&);                          // Returns true if file already existed, returns false if not
+	bool storeInFile(ofstream&);                         // ^
 
 	void setType(Type typeIn) { transType = typeIn; }
 	void setTime(timeStruct timeIn) { transTime = timeIn; }

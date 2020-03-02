@@ -82,22 +82,22 @@ bool Transaction::setAcctID(int ID) {
 	}
 }
 
-bool Transaction::readFromFile(fstream fileIn) {
+void Transaction::readFromFile(fstream& fileIn) {
 	fileIn.read(reinterpret_cast<char*>(this), sizeof(this));
 }
 
-bool Transaction::readFromFile(ifstream fileIn) {
+void Transaction::readFromFile(ifstream& fileIn) {
 	fileIn.read(reinterpret_cast<char*>(this), sizeof(this));
 }
 
-bool Transaction::storeInFile(fstream fileIn) {
+bool Transaction::storeInFile(fstream& fileIn) {
 	bool didFileExist = false;
 	if (fileIn) didFileExist = true;
 	fileIn.write(reinterpret_cast<char*>(this), sizeof(this));
 	return didFileExist;
 }
 
-bool Transaction::storeInFile(ofstream fileIn) {
+bool Transaction::storeInFile(ofstream& fileIn) {
 	bool didFileExist = false;
 	if (fileIn) didFileExist = true;
 	fileIn.write(reinterpret_cast<char*>(this), sizeof(this));
