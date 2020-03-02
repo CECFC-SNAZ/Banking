@@ -2,11 +2,12 @@
 // Transaction.h
 // Nicholas Pie
 // 28 February 2020
-// A class to store transactions
+// A class to store transactions + a struct to store time
 
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 
+#include <fstream>
 using namespace std;
 
 struct timeStruct {
@@ -25,8 +26,12 @@ public:
 	Transaction();
 	Transaction(Type, timeStruct, double, int);
 	bool setTransaction(Type, timeStruct, double, int); // Returns false in the case of an error, otherwise returns true 
-	bool setAmount(double);                         // Returns false in the case of an error, otherwise returns true
-	bool setAcctID(int);                            // Returns false in the case of an error, otherwise returns true
+	bool setAmount(double);                             // ^
+	bool setAcctID(int);                                // ^
+	bool readFromFile(fstream);                         // ^
+	bool readFromFile(ifstream);                        // ^
+	bool storeInFile(fstream);                          // Returns true if file already existed, returns false if not
+	bool storeInFile(ofstream);                         // ^
 
 	void setType(Type typeIn) { transType = typeIn; }
 	void setTime(timeStruct timeIn) { transTime = timeIn; }
