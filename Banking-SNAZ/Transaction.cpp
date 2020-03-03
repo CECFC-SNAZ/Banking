@@ -14,16 +14,20 @@ Transaction::Transaction() {
 	transTime = { 0,0,0,0,0,0 };
 	transAmount = -17;
 	accountID = -13;
+	prevBalance = -35;
+	newBalance = -52;
 }
 
-Transaction::Transaction(Type type, timeStruct timeIn, double amount, int ID) {
+Transaction::Transaction(Type type, timeStruct timeIn, double amount, int ID, double pBal, double nBal) {
 	transType = type;
 	transTime = timeIn;
 	transAmount = amount;
 	accountID = ID;
+	prevBalance = pBal;
+	newBalance = nBal;
 }
 
-bool Transaction::setTransaction(Type type, timeStruct timeIn, double amount, int ID) {
+bool Transaction::setTransaction(Type type, timeStruct timeIn, double amount, int ID, double pBal, double nBal) {
 	try {
 		if (amount <= 0) throw(1);
 		if (ID <= 0) throw(2);
@@ -31,6 +35,8 @@ bool Transaction::setTransaction(Type type, timeStruct timeIn, double amount, in
 		transTime = timeIn;
 		transAmount = amount;
 		accountID = ID;
+		prevBalance = pBal;
+		newBalance = nBal;
 		return true;
 	}
 	catch (int e) {
@@ -107,17 +113,17 @@ bool Transaction::storeInFile(ofstream& fileIn) {
 bool Transaction::test() {
 	fstream coolfile;
 	coolfile.open("coolfile.dat", ios::out | ios::binary);
-	Transaction transTesting(Transaction::Type::Deposit, { 2020,3,2,10,33,37 }, 3.56, 67);
-	Transaction transTesting2(Transaction::Type::Deposit, { 2010,3,2,10,33,37 }, 3.56, 67);
-	transTesting.storeInFile(coolfile);
-	transTesting2.storeInFile(coolfile);
-	transTesting.setTime({ 2019,3,2,10,33,37 });
-	transTesting2.setTime({ 2009,3,2,10,33,37 });
+	Transaction transTesting(Transaction::Type::Deposit, { 2020,3,2,10,33,37 }, 3.56, 6430377, 100, 103.56);  // Defines a new transaction to test on
+	Transaction transTesting2(Transaction::Type::Deposit, { 2010,3,2,10,33,37 }, 3.56, 8809567, 100, 103.56); // ^
+	transTesting.storeInFile(coolfile);  // Saves the transactions to a file
+	transTesting2.storeInFile(coolfile); // ^
+	transTesting.setTime({ 2019,3,2,10,33,37 });  // Sets the time to something else, that way if the read fails it will return the wrong value
+	transTesting2.setTime({ 2009,3,2,10,33,37 }); // ^
 	coolfile.close();
 	coolfile.open("coolfile.dat", ios::in | ios::binary);
-	transTesting.readFromFile(coolfile);
-	transTesting2.readFromFile(coolfile);
-	if (transTesting.getTime().year == 2020 and transTesting2.getTime().year == 2010) {
+	transTesting.readFromFile(coolfile);  // Reads the transactions back in from the file
+	transTesting2.readFromFile(coolfile); // ^
+	if (transTesting.getTime().year == 2020 and transTesting2.getTime().year == 2010) { // Checks for the correct values
 		return true;
 	}
 	else {
