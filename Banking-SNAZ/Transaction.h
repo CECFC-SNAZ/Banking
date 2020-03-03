@@ -22,10 +22,12 @@ private:
 	timeStruct transTime;
 	double transAmount;
 	int accountID;
+	double prevBalance;
+	double newBalance;
 public:
 	Transaction();
-	Transaction(Type, timeStruct, double, int);
-	bool setTransaction(Type, timeStruct, double, int); // Returns false in the case of an error, otherwise returns true 
+	Transaction(Type, timeStruct, double, int, double, double);
+	bool setTransaction(Type, timeStruct, double, int, double, double); // Returns false in the case of an error, otherwise returns true 
 	bool setAmount(double);                             // ^
 	bool setAcctID(int);                                // ^
 	void readFromFile(fstream&);
@@ -34,6 +36,10 @@ public:
 	bool storeInFile(ofstream&); // ^
 	bool test(); // The test that is run at the beginning of main(), returns false in the event of an error
 
+	void setPrevBalance(double balIn) { prevBalance = balIn; }
+	void setNewBalance(double balIn) { newBalance = balIn; }
+	double getPrevBalance() { return prevBalance; }
+	double getNewBalance() { return newBalance; }
 	void setType(Type typeIn) { transType = typeIn; }
 	void setTime(timeStruct timeIn) { transTime = timeIn; }
 	Type getType() { return transType; }
