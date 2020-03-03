@@ -4,6 +4,7 @@ by Sedona Dionne
 February 28, 2020
 */
 
+#include "Transaction.h"
 #include <iostream>
 using namespace std;
 

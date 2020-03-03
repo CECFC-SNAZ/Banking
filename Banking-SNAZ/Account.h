@@ -25,6 +25,7 @@ private:
 	{
 		char sname[40], suserName[40], spassword[40];
 		int saccountNuber;
+		accountTypes types[40];
 	};
 
 public:
@@ -33,6 +34,19 @@ public:
 	void setUsername();
 	void setpassword();
 	void setAccountNumber();
+	void createAccount();
+	//Allow the user to sign in
+	void signIn();
+	//Search file for given username. Returns true if the account exists.
+	bool searchUsername(string username);
+	//Search file for given account username and password. Returns the account if it is found.
+	accountStorage searchAccountInfo(string username, string password);
+	//Store vital account information in a file
+	void storeAccountInfo(accountStorage);
+	//Retrive account information from file. May not be necessary.
+	accountStorage getAccountInfo();
+	//Access user's banking accounts (Most user input will be handled here)
+	void accessAccounts();
 	string getName() const
 	{
 		return name;
