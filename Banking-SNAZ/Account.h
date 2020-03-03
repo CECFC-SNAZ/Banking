@@ -17,6 +17,16 @@ class Account
 private:
 	string name, username, password;
 	int accountNumber;
+	enum accountTypes
+	{
+		Checking, saving, CD, HELOC
+	};
+	struct accountStorage
+	{
+		char sname[40], suserName[40], spassword[40];
+		int saccountNuber;
+	};
+
 public:
 	Account();
 	void setName();
