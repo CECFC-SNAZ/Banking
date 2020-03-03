@@ -1,6 +1,4 @@
-﻿  Source.cpp
-  Transaction.cpp
-  Generating Code...
+﻿  Transaction.cpp
 C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Transaction.cpp(66): warning C4715: 'Transaction::setAmount': not all control paths return a value
 C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Transaction.cpp(83): warning C4715: 'Transaction::setAcctID': not all control paths return a value
-  Banking-SNAZ.vcxproj -> C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\x64\Debug\Banking-SNAZ.exe
+  Banking-SNAZ.vcxproj -> C:\Users\NicholasPie\Source\Repos\CECFC-SNAZ\Banking\x64\Debug\Banking-SNAZ.exe

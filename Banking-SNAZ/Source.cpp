@@ -7,22 +7,14 @@
 #include <iostream>
 using namespace std;
 
+const bool debug = true;
+
 int main() {
-	// A test for transaction file I/O
-	// Will output 2020,2020,2019,2020 if file I/O works properly
-	/*
-	fstream coolfile;
-	coolfile.open("coolfile.dat", ios::out | ios::binary);
-	Transaction transTesting(Transaction::Type::Deposit, { 2020,3,2,10,33,37 }, 3.56, 67);
-	cout << transTesting.getTime().year << endl;
-	if (transTesting.storeInFile(coolfile)) cout << "new file made\n";
-	cout << transTesting.getTime().year << endl;
-	transTesting.setTransaction(Transaction::Type::Deposit, { 2019,3,2,10,33,37 }, 3.56, 67);
-	cout << transTesting.getTime().year << endl;
-	coolfile.close();
-	coolfile.open("coolfile.dat", ios::in | ios::binary);
-	transTesting.readFromFile(coolfile);
-	cout << transTesting.getTime().year << endl;
-	*/
+	if (debug) { // If debug is set to true, it will run a series of test to make sure everything is working properly
+		Transaction tmpTrans;
+		if (not tmpTrans.test()) cout << "Error with transaction file I/O\n";
+	}
+
+
 	return 0;
 }

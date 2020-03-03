@@ -103,3 +103,24 @@ bool Transaction::storeInFile(ofstream& fileIn) {
 	fileIn.write(reinterpret_cast<char*>(this), sizeof(this));
 	return didFileExist;
 }
+
+bool Transaction::test() {
+	fstream coolfile;
+	coolfile.open("coolfile.dat", ios::out | ios::binary);
+	Transaction transTesting(Transaction::Type::Deposit, { 2020,3,2,10,33,37 }, 3.56, 67);
+	Transaction transTesting2(Transaction::Type::Deposit, { 2010,3,2,10,33,37 }, 3.56, 67);
+	transTesting.storeInFile(coolfile);
+	transTesting2.storeInFile(coolfile);
+	transTesting.setTime({ 2019,3,2,10,33,37 });
+	transTesting2.setTime({ 2009,3,2,10,33,37 });
+	coolfile.close();
+	coolfile.open("coolfile.dat", ios::in | ios::binary);
+	transTesting.readFromFile(coolfile);
+	transTesting2.readFromFile(coolfile);
+	if (transTesting.getTime().year == 2020 and transTesting2.getTime().year == 2010) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
