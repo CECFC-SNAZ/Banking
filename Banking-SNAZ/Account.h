@@ -19,13 +19,24 @@ private:
 	int accountNumber;
 	enum accountTypes
 	{
-		Checking, saving, CD, HELOC
+		CHECKING, SAVINGS, CD, HELOC
+	};
+	struct accountID
+	{
+		accountTypes type;
+		int IDnumber;
+	};
+	struct activeAccount
+	{
+		string aname, ausername, apassword;
+		int aaccountNumber;
+		vector<accountID> aaccountIDs;
 	};
 	struct accountStorage
 	{
 		char sname[40], suserName[40], spassword[40];
 		int saccountNuber;
-		accountTypes types[40];
+		accountID saccountIDs[40];
 	};
 
 public:
