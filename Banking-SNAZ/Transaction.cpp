@@ -5,6 +5,7 @@
 
 #include "Transaction.h"
 #include <iostream>
+#include <vector>
 using namespace std;
 
 const bool debug = false;
@@ -96,6 +97,34 @@ void Transaction::readFromFile(ifstream& fileIn) {
 	fileIn.read(reinterpret_cast<char*>(this), sizeof(this));
 }
 
+vector<Transaction> Transaction::readEntireFile(fstream& fileIn) {
+	vector<Transaction> tmpTransVect;
+	Transaction tmpTrans;
+	try {
+		while (true) {
+			fileIn.read(reinterpret_cast<char*>(&tmpTrans), sizeof(tmpTrans));
+			tmpTransVect.push_back(tmpTrans);
+		}
+	}
+	catch (...) {
+		return tmpTransVect;
+	}
+}
+
+vector<Transaction> Transaction::readEntireFile(ifstream& fileIn) {
+	vector<Transaction> tmpTransVect;
+	Transaction tmpTrans;
+	try {
+		while (true) {
+			fileIn.read(reinterpret_cast<char*>(&tmpTrans), sizeof(tmpTrans));
+			tmpTransVect.push_back(tmpTrans);
+		}
+	}
+	catch (...) {
+		return tmpTransVect;
+	}
+}
+
 bool Transaction::storeInFile(fstream& fileIn) {
 	bool didFileExist = false;
 	if (fileIn) didFileExist = true;
@@ -113,20 +142,21 @@ bool Transaction::storeInFile(ofstream& fileIn) {
 bool Transaction::test() {
 	fstream coolfile;
 	coolfile.open("coolfile.dat", ios::out | ios::binary);
-	Transaction transTesting(Transaction::Type::Deposit, { 2020,3,2,10,33,37 }, 3.56, 6430377, 100, 103.56);  // Defines a new transaction to test on
-	Transaction transTesting2(Transaction::Type::Deposit, { 2010,3,2,10,33,37 }, 3.56, 8809567, 100, 103.56); // ^
-	transTesting.storeInFile(coolfile);  // Saves the transactions to a file
-	transTesting2.storeInFile(coolfile); // ^
-	transTesting.setTime({ 2019,3,2,10,33,37 });  // Sets the time to something else, that way if the read fails it will return the wrong value
-	transTesting2.setTime({ 2009,3,2,10,33,37 }); // ^
+	vector<Transaction> tmpTransVect;
+	Transaction tmpTrans;
+	for (int i = 0; i < 10; i++) {
+		tmpTrans.setTransaction(Transaction::Type::Deposit, { 2010 + i,3,2,10,33,37 }, 3.56, 8809567, 100, 103.56);
+		tmpTransVect.push_back(tmpTrans);
+	}
+	for (int i = 0; i < 10; i++) {
+		tmpTransVect[i].storeInFile(coolfile);  // Saves the transactions to a file
+		tmpTransVect[i].setTime({ 2010,3,2,10,33,37 }); // Sets the time to something else, that way if the read fails it will return the wrong value
+	}
 	coolfile.close();
 	coolfile.open("coolfile.dat", ios::in | ios::binary);
-	transTesting.readFromFile(coolfile);  // Reads the transactions back in from the file
-	transTesting2.readFromFile(coolfile); // ^
-	if (transTesting.getTime().year == 2020 and transTesting2.getTime().year == 2010) { // Checks for the correct values
-		return true;
+	tmpTransVect = tmpTrans.readEntireFile(coolfile);  // Reads the transactions back in from the file
+	for (int i = 0; i < 10; i++) {
+		if (tmpTransVect[i].getTime().year != 2010 + i) return false; // Making sure they're in the right order
 	}
-	else {
-		return false;
-	}
+	return true;
 }

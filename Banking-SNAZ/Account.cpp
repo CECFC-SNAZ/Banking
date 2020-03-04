@@ -23,7 +23,7 @@ void Account::createAccount()
 	accountStorage newAccount;
 	cout << "Enter your name: ";
 	cin >> newAccount.sname;
-	while (exists = true)
+	while (exists == true)
 	{
 		exists = false;
 		cout << "Enter a new username: ";
