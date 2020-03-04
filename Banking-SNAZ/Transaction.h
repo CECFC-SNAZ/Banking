@@ -8,6 +8,7 @@
 #define TRANSACTION_H
 
 #include <fstream>
+#include <vector>
 using namespace std;
 
 struct timeStruct {
@@ -32,6 +33,8 @@ public:
 	bool setAcctID(int);                                // ^
 	void readFromFile(fstream&);
 	void readFromFile(ifstream&);
+	vector<Transaction> readEntireFile(fstream&);  // Returns a vector containing every transaction stored in the specified file
+	vector<Transaction> readEntireFile(ifstream&); // ^
 	bool storeInFile(fstream&);  // Returns true if file already existed, returns false if not
 	bool storeInFile(ofstream&); // ^
 	bool test(); // The test that is run at the beginning of main(), returns false in the event of an error
