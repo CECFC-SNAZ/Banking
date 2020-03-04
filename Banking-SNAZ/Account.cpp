@@ -18,11 +18,12 @@ Account::Account()
 
 void Account::createAccount()
 {
-	bool exists = true;
-	string tempUsername, tempPassword;
-	accountStorage newAccount;
+	int choice;
+	bool exists = true, invalid = false, exit = false;
+	string tempUsername;
+	activeAccount newAccount;
 	cout << "Enter your name: ";
-	cin >> newAccount.sname;
+	cin >> newAccount.aname;
 	while (exists == true)
 	{
 		exists = false;
@@ -34,9 +35,42 @@ void Account::createAccount()
 			cout << "This username already exists.";
 		}
 	}
-	//Store new username
+	newAccount.aname = tempUsername;
 	cout << "Enter a new password: ";
-	cin >> tempPassword;
+	cin >> newAccount.apassword;
+	while (!exit)
+	{
+		if (invalid)
+		{
+			cout << "Invalid selection.\n\n";
+		}
+		cout << "Which kinds of account do you want to open?\n:1 - Checking\n2 - Savings\n3 - HELOC\n4 - CD\n5 - Finished opening accounts."
+			<< " Note, you may open more than \nChoice: ";
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			newAccount.atypes.push_back(CHECKING);
+			invalid = false;
+			break;
+		case 2:
+			newAccount.atypes.push_back(SAVINGS);
+			invalid = false;
+			break;
+		case 3:
+			newAccount.atypes.push_back(HELOC);
+			invalid = false;
+			break;
+		case 4:
+			newAccount.atypes.push_back(CD);
+			invalid = false;
+		case 5:
+			exit = true;
+			break;
+		default:
+			invalid = true;
+		}
+	}
 }
 
 void Account::signIn()
