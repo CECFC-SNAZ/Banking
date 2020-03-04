@@ -143,6 +143,7 @@
     <ClInclude Include="Transaction.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Account.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Transaction.cpp" />
   </ItemGroup>

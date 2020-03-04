@@ -5,6 +5,7 @@ February 28, 2020
 Struct stores time of entry.  Class Base includes interest and fees.
 */
 
+#include "Transaction.h"
 #include <iostream>
 using namespace std;
 struct entrystruct {
