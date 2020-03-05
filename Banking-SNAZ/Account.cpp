@@ -101,11 +101,47 @@ void Account::createAccount()
 void Account::signIn()
 {
 	string tempUsername, tempPassword;
-	cout << "Enter your username: ";
-	cin >> tempUsername;
-	cout << "\nEnter your password: ";
-	cin >> tempPassword;
-	//Search stored files for an account with this info
+	int index;
+	bool exists = false;
+	while (!exists)
+	{
+		cout << "Enter your username: ";
+		cin >> tempUsername;
+		cout << "\nEnter your password: ";
+		cin >> tempPassword;
+		//Search stored files for an account with this info
+		index = searchAccountInfo(tempUsername, tempPassword);
+		if (index >= 0)
+		{
+			userAccount.aname = availableAccounts[index].sname;
+			userAccount.ausername = availableAccounts[index].suserName;
+			userAccount.apassword = availableAccounts[index].spassword;
+			userAccount.aaccountNumber = availableAccounts[index].saccountNuber;
+			userAccount.aaccountIDs.clear();
+			for (int i = 0; i < 10; i++)
+			{
+				userAccount.aaccountIDs.push_back(availableAccounts[index].saccountIDs[i]);
+			}
+			exists = true;
+		}
+		else
+		{
+			cout << "\n\nYour username or password is incorrect.\n\n";
+			exists = false;
+		}
+	}
+}
+
+int Account::searchAccountInfo(string username, string password)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		if (availableAccounts[i].suserName == username && availableAccounts[i].spassword == password)
+		{
+			return i;
+		}
+	}
+	return -1;
 }
 
 void Account::storeAccountInfo()
@@ -152,4 +188,9 @@ void Account::saveAccounts()
 	storefile.open("UserAccounts.dat", ios::out | ios::binary);
 	storefile.write(reinterpret_cast<char*>(saveAccounts), sizeof(saveAccounts));
 	storefile.close;
+}
+
+void Account::accessAccounts()
+{
+
 }

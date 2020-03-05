@@ -36,7 +36,7 @@ private:
 	struct accountStorage
 	{
 		char sname[40], suserName[40], spassword[40];
-		int saccountNuber;
+		int saccountNuber, index;
 		accountID saccountIDs[10];
 		bool filled = false;
 	};
@@ -52,14 +52,14 @@ public:
 	void setAccountNumber();
 	//Read saved data from a file
 	void useSaved();
-	//Gathe rinformation and create a new account
+	//Gather information and create a new account (note: either createAccount or signIn is used to set the initial active account, not both)
 	void createAccount();
 	//Allow the user to sign in
 	void signIn();
 	//Search file for given username. Returns true if the account exists.
 	bool searchUsername(string username);
-	//Search file for given account username and password. Returns the account if it is found.
-	void searchAccountInfo(string username, string password);
+	//Search file for given account username and password. Returns the index of the account if it is found, or -1 if not found.
+	int searchAccountInfo(string username, string password);
 	//Add an account's info to an array for storage
 	void storeAccountInfo();
 	//Check for a file's existance. Returns true if the file exists and false if it does not.
