@@ -16,14 +16,25 @@ Account::Account()
 	accountNumber = -1;
 }
 
+void Account::useSaved()
+{
+	if (checkFile("userAccounts.dat"))
+	{
+		fstream inputFile;
+		inputFile.open("userAccounts.dat", ios::in | ios::binary);
+		inputFile.read(reinterpret_cast<char*>(availableAccounts), sizeof(availableAccounts));
+		inputFile.close;
+	}
+}
+
 void Account::createAccount()
 {
 	int choice;
 	bool exists = true, invalid = false, exit = false;
 	string tempUsername;
-	activeAccount newAccount;
+	accountID tempID;
 	cout << "Enter your name: ";
-	cin >> newAccount.aname;
+	cin >> userAccount.aname;
 	while (exists == true)
 	{
 		exists = false;
@@ -35,9 +46,11 @@ void Account::createAccount()
 			cout << "This username already exists.";
 		}
 	}
-	newAccount.aname = tempUsername;
+	userAccount.aname = tempUsername;
 	cout << "Enter a new password: ";
-	cin >> newAccount.apassword;
+	cin >> userAccount.apassword;
+	userAccount.aaccountNumber = totalAccounts + 1;
+	totalAccounts += 1;
 	while (!exit)
 	{
 		if (invalid)
@@ -50,19 +63,31 @@ void Account::createAccount()
 		switch (choice)
 		{
 		case 1:
-			newAccount.atypes.push_back(CHECKING);
+			tempID.type = CHECKING;
+			tempID.IDnumber = totalAccounts + 1;
+			totalAccounts += 1;
+			userAccount.aaccountIDs.push_back(tempID);
 			invalid = false;
 			break;
 		case 2:
-			newAccount.atypes.push_back(SAVINGS);
+			tempID.type = SAVINGS;
+			tempID.IDnumber = totalAccounts + 1;
+			totalAccounts += 1;
+			userAccount.aaccountIDs.push_back(tempID);
 			invalid = false;
 			break;
 		case 3:
-			newAccount.atypes.push_back(HELOC);
+			tempID.type = HELOC;
+			tempID.IDnumber = totalAccounts + 1;
+			totalAccounts += 1;
+			userAccount.aaccountIDs.push_back(tempID);
 			invalid = false;
 			break;
 		case 4:
-			newAccount.atypes.push_back(CD);
+			tempID.type = CD;
+			tempID.IDnumber = totalAccounts + 1;
+			totalAccounts += 1;
+			userAccount.aaccountIDs.push_back(tempID);
 			invalid = false;
 		case 5:
 			exit = true;
@@ -81,4 +106,50 @@ void Account::signIn()
 	cout << "\nEnter your password: ";
 	cin >> tempPassword;
 	//Search stored files for an account with this info
+}
+
+void Account::storeAccountInfo()
+{
+	accountStorage storeAccount;
+	strcpy(storeAccount.sname, userAccount.aname.c_str());
+	strcpy(storeAccount.suserName, userAccount.ausername.c_str());
+	strcpy(storeAccount.spassword, userAccount.apassword.c_str());
+	storeAccount.saccountNuber = userAccount.aaccountNumber;
+	for (int i = 0; i < userAccount.aaccountIDs.size() || i <= 10; i++)
+	{
+		storeAccount.saccountIDs[i] = userAccount.aaccountIDs[i];
+	}
+	storeAccount.filled = true;
+	accountsForStorage.push_back(storeAccount);
+}
+
+bool Account::checkFile(string fileName)
+{
+	bool check;
+	fstream inputData;
+	inputData.open(fileName, ios::in | ios::binary);
+	if (inputData)
+	{
+		check = true;
+	}
+	else
+	{
+		check = false;
+	}
+	inputData.close();
+
+	return check;
+}
+
+void Account::saveAccounts()
+{
+	accountStorage saveAccounts[10];
+	for (int i = 0; i < accountsForStorage.size(); i++)
+	{
+		saveAccounts[i] = accountsForStorage[i];
+	}
+	fstream storefile;
+	storefile.open("UserAccounts.dat", ios::out | ios::binary);
+	storefile.write(reinterpret_cast<char*>(saveAccounts), sizeof(saveAccounts));
+	storefile.close;
 }
