@@ -97,34 +97,6 @@ void Transaction::readFromFile(ifstream& fileIn) {
 	fileIn.read(reinterpret_cast<char*>(this), sizeof(this));
 }
 
-vector<Transaction> Transaction::readEntireFile(fstream& fileIn) {
-	vector<Transaction> tmpTransVect;
-	Transaction tmpTrans;
-	try {
-		while (true) {
-			fileIn.read(reinterpret_cast<char*>(&tmpTrans), sizeof(tmpTrans));
-			tmpTransVect.push_back(tmpTrans);
-		}
-	}
-	catch (...) {
-		return tmpTransVect;
-	}
-}
-
-vector<Transaction> Transaction::readEntireFile(ifstream& fileIn) {
-	vector<Transaction> tmpTransVect;
-	Transaction tmpTrans;
-	try {
-		while (true) {
-			fileIn.read(reinterpret_cast<char*>(&tmpTrans), sizeof(tmpTrans));
-			tmpTransVect.push_back(tmpTrans);
-		}
-	}
-	catch (...) {
-		return tmpTransVect;
-	}
-}
-
 bool Transaction::storeInFile(fstream& fileIn) {
 	bool didFileExist = false;
 	if (fileIn) didFileExist = true;
@@ -150,11 +122,15 @@ bool Transaction::test() {
 	}
 	for (int i = 0; i < 10; i++) {
 		tmpTransVect[i].storeInFile(coolfile);  // Saves the transactions to a file
-		tmpTransVect[i].setTime({ 2010,3,2,10,33,37 }); // Sets the time to something else, that way if the read fails it will return the wrong value
+		tmpTransVect[i].setTime({ 2000,3,2,10,33,37 }); // Sets the time to something else, that way if the read fails it will return the wrong value
 	}
 	coolfile.close();
 	coolfile.open("coolfile.dat", ios::in | ios::binary);
-	tmpTransVect = tmpTrans.readEntireFile(coolfile);  // Reads the transactions back in from the file
+	tmpTransVect.erase(tmpTransVect.begin(), tmpTransVect.end());
+	for (int i = 0; i < 10; i++) { // Reads the transactions back in from the file
+		tmpTrans.readFromFile(coolfile);
+		tmpTransVect.push_back(tmpTrans);
+	}
 	for (int i = 0; i < 10; i++) {
 		if (tmpTransVect[i].getTime().year != 2010 + i) return false; // Making sure they're in the right order
 	}
