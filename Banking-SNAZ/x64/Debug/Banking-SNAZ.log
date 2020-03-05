@@ -1,14 +1,2 @@
-﻿  Account.cpp
-C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Account.cpp(26,18): error C3867: 'std::basic_fstream<char,std::char_traits<char>>::close': non-standard syntax; use '&' to create a pointer to member
-C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Account.cpp(114,1): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(133): message : see declaration of 'strcpy'
-C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Account.cpp(115,1): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(133): message : see declaration of 'strcpy'
-C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Account.cpp(116,1): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(133): message : see declaration of 'strcpy'
-C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Account.cpp(154,17): error C3867: 'std::basic_fstream<char,std::char_traits<char>>::close': non-standard syntax; use '&' to create a pointer to member
-  Source.cpp
-  Transaction.cpp
-  Generating Code...
-C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Transaction.cpp(73): warning C4715: 'Transaction::setAmount': not all control paths return a value
-C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Transaction.cpp(90): warning C4715: 'Transaction::setAcctID': not all control paths return a value
+﻿  Transaction.cpp
+  Banking-SNAZ.vcxproj -> C:\Users\NicholasPie\Source\Repos\CECFC-SNAZ\Banking\x64\Debug\Banking-SNAZ.exe
