@@ -1,7 +1,7 @@
 // Transaction.cpp
 // Nicholas Pie
 // 28 February 2020
-// Function definitions for the transaction class + a 
+// Function definitions for the transaction class + the getTime() function
 
 #include "Transaction.h"
 #include <iostream>

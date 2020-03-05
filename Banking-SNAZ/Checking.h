@@ -19,4 +19,4 @@ public:
 
 
 
-#endif CHECKIN_H
+#endif CHECKING_H
