@@ -140,10 +140,14 @@
   <ItemGroup>
     <ClInclude Include="Account.h" />
     <ClInclude Include="BaseClass.h" />
+    <ClInclude Include="Checking.h" />
+    <ClInclude Include="Cls.h" />
     <ClInclude Include="Transaction.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
+    <ClCompile Include="Checking.cpp" />
+    <ClCompile Include="Cls.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Transaction.cpp" />
   </ItemGroup>
