@@ -1,7 +1,7 @@
 // Transaction.cpp
 // Nicholas Pie
 // 28 February 2020
-// Function definitions for the transaction class
+// Function definitions for the transaction class + the getTime() function
 
 #include "Transaction.h"
 #include <iostream>
@@ -9,6 +9,11 @@
 using namespace std;
 
 const bool debug = false;
+
+timeStruct getTime(){
+	return { 2020,3,5,10,13,7 };
+	// Write getTime() later
+}
 
 Transaction::Transaction() {
 	transType = Transaction::Type::Deposit;
@@ -116,7 +121,7 @@ bool Transaction::test() {
 	coolfile.open("coolfile.dat", ios::out | ios::binary);
 	vector<Transaction> tmpTransVect;
 	Transaction tmpTrans;
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 10; i++) { // Initializes the transaction vector
 		tmpTrans.setTransaction(Transaction::Type::Deposit, { 2010 + i,3,2,10,33,37 }, 3.56, 8809567, 100, 103.56);
 		tmpTransVect.push_back(tmpTrans);
 	}
