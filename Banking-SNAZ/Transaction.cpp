@@ -3,15 +3,19 @@
 // 28 February 2020
 // Function definitions for the transaction class + the getTime() function
 
+#define _CRT_SECURE_NO_WARNINGS
 #include "Transaction.h"
 #include <iostream>
+#include <ctime>
 #include <vector>
 using namespace std;
 
 const bool debug = false;
 
 timeStruct getTime(){
-	return { 2020,3,5,10,13,7 };
+	time_t t = time(0);
+	tm* now = localtime(&t);
+	return { now->tm_year + 1900, now->tm_mon + 1, now->tm_mday, now->tm_hour, now->tm_min, now->tm_sec };
 	// Write getTime() later
 }
 
@@ -64,6 +68,7 @@ bool Transaction::setAmount(double amount) {
 	try {
 		if (amount <= 0) throw(1);
 		transAmount = amount;
+		return true;
 	}
 	catch (int e) {
 		if (e == 1) {
@@ -81,6 +86,7 @@ bool Transaction::setAcctID(int ID) {
 	try {
 		if (ID <= 0) throw(1);
 		accountID = ID;
+		return true;
 	}
 	catch (int e) {
 		if (e == 1) {

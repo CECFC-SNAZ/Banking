@@ -31,8 +31,8 @@ public:
 	Transaction();
 	Transaction(Type, timeStruct, double, int, double, double);
 	bool setTransaction(Type, timeStruct, double, int, double, double); // Returns false in the case of an error, otherwise returns true 
-	bool setAmount(double);                             // ^
-	bool setAcctID(int);                                // ^
+	bool setAmount(double);                                             // ^
+	bool setAcctID(int);                                                // ^
 	void readFromFile(fstream&);
 	void readFromFile(ifstream&);
 	bool storeInFile(fstream&);  // Returns true if file already existed, returns false if not

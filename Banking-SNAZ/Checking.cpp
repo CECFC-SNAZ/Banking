@@ -15,10 +15,7 @@ Transaction Checking::Deposit(double inp) {
 
 Transaction Checking::Withdrawal(double inp) {
 	Transaction tmpTrans;
-	if (inp > withdrawLimit) {
-		tmpTrans.setTransaction(Transaction::Type::Withdrawal, getTime(), 0, 0, get_balance(), get_balance());
-	}
-	else if (inp <= 0) {
+	if (inp > withdrawLimit or inp > get_balance() or inp <= 0) {
 		tmpTrans.setTransaction(Transaction::Type::Withdrawal, getTime(), 0, 0, get_balance(), get_balance());
 	}
 	else {
