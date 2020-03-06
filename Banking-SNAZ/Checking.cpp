@@ -6,6 +6,10 @@
 #include "Checking.h"
 using namespace std;
 
+CheckingAccount::CheckingAccount() {
+	annualInterestRate = 0;
+}
+
 Transaction CheckingAccount::Deposit(double inp) {
 	Transaction tmpTrans;
 	if (inp <= 0) tmpTrans.setTransaction(Transaction::Type::Deposit, getTime(), 0, 0, get_balance(), get_balance());

@@ -12,11 +12,13 @@
 using namespace std;
 
 class CheckingAccount : public Base {
+private:
+	static float annualInterestRate;
+	double overdraftfee = 0;
 public:
+	CheckingAccount();
 	Transaction Deposit(double);
 	Transaction Withdrawal(double);
 };
-
-
 
 #endif CHECKING_H
