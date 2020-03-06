@@ -8,7 +8,11 @@ March 4, 2020
 
 
   Base::Base() {
-entrytime = { 0, 0, 0, 0, 0 };
+      entryTime.tm_min = 0;
+      entryTime.tm_hour = 0;
+      entryTime.tm_mday = 0;
+      entryTime.tm_mon = 0;
+      entryTime.tm_year = 0;
 }
 
 Base::Base() {
@@ -16,19 +20,19 @@ Base::Base() {
 }
 
 
-void Base::calcDeposit()
+void Base::calcDeposit(double)
 {
 }
 
-void Base::calcCheck()
+void Base::calcCheck(double)
 {
 }
 
-void Base::calcLate()
+void Base::calcLate(double)
 {
 }
 
-void Base::calcEarlywithdraw()
+void Base::calcEarlywithdraw(double)
 {
 }
 

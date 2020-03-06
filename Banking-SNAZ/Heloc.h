@@ -14,5 +14,5 @@ class Heloc : public Base
 private:
 	float interestRate;
 public:
-	
+	Heloc(int accountNumberIn);
 };
