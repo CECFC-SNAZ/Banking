@@ -13,6 +13,7 @@ struct entrystruct {
 };
 class Base {
 private:
+    int accountNumber;
     double balance;
     double depositfees, checkfees, overdraftfee, latefee, earlywithdrawfee, totalfees;
     entrystruct entryTime;

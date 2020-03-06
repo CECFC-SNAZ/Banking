@@ -7,17 +7,20 @@ Prototypes for the Account class
 */
 
 #include "BaseClass.h"
+#include "Cls.h"
+#include "Checking.h"
 #include <iostream>
 #include <vector>
 #include <string>
 using namespace std;
 
+#define elif else if
+
 class Account
 {
 private:
+	
 	static int totalAccounts, totalAccountIDs;
-	string name, username, password;
-	int accountNumber;
 	enum accountTypes
 	{
 		CHECKING, SAVINGS, CD, HELOC
@@ -46,10 +49,6 @@ private:
 
 public:
 	Account();
-	void setName();
-	void setUsername();
-	void setpassword();
-	void setAccountNumber();
 	//Read saved data from a file
 	void useSaved();
 	//Gather information and create a new account (note: either createAccount or signIn is used to set the initial active account, not both)
@@ -62,29 +61,10 @@ public:
 	int searchAccountInfo(string username, string password);
 	//Add an account's info to an array for storage
 	void storeAccountInfo();
-	//Check for a file's existance. Returns true if the file exists and false if it does not.
+	//Check for a file's existence. Returns true if the file exists and false if it does not.
 	bool checkFile(string fileName);
 	//Save all accounts to a file
 	void saveAccounts();
-	//Retrive account information from file. May not be necessary.
-	void getAccountInfo();
 	//Access user's banking accounts (Most user input will be handled here)
 	void accessAccounts();
-	string getName() const
-	{
-		return name;
-	}
-	string getUsername() const
-	{
-		return username;
-	}
-	string getPassword() const
-	{
-		return password;
-	}
-	int getAccountNumber() const
-	{
-		return accountNumber;
-	}
-
 };

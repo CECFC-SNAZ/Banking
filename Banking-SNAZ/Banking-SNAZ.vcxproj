@@ -142,10 +142,12 @@
     <ClInclude Include="BaseClass.h" />
     <ClInclude Include="Checking.h" />
     <ClInclude Include="Cls.h" />
+    <ClInclude Include="Heloc.h" />
     <ClInclude Include="Transaction.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
+    <ClCompile Include="BaseClass.cpp" />
     <ClCompile Include="Checking.cpp" />
     <ClCompile Include="Cls.cpp" />
     <ClCompile Include="Source.cpp" />
