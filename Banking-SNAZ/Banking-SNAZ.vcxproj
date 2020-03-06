@@ -150,6 +150,7 @@
     <ClCompile Include="BaseClass.cpp" />
     <ClCompile Include="Checking.cpp" />
     <ClCompile Include="Cls.cpp" />
+    <ClCompile Include="Heloc.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Transaction.cpp" />
   </ItemGroup>

@@ -15,8 +15,8 @@ March 4, 2020
       entryTime.tm_year = 0;
 }
 
-Base::Base() {
-  double bal = balance;
+Base::Base(double bal) {
+  balance = bal;
 }
 
 

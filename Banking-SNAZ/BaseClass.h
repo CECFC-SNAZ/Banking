@@ -12,7 +12,7 @@ struct entrystruct {
     int tm_min, tm_hour, tm_mday, tm_mon, tm_year;
 };
 class Base {
-private:
+protected:
     int accountNumber;
     double balance;
     double depositfees, checkfees, overdraftfee, latefee, earlywithdrawfee, totalfees;
