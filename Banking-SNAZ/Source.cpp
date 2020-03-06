@@ -17,13 +17,6 @@ int main() {
 		Transaction tmpTrans;
 		if (not tmpTrans.test()) cout << "Error with transaction file I/O\n";
 	}
-	while (false) {
-		timeStruct tmpTime;
-		tmpTime = getTime();
-		cout << tmpTime.month << "/" << tmpTime.day << "/" << tmpTime.year << " " << tmpTime.hour << ":" << tmpTime.minute << ":" << tmpTime.second;
-		string tmpStr;
-		cin.clear();
-		getline(cin, tmpStr);
-	}
+
 	return 0;
 }
