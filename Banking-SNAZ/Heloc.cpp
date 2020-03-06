@@ -11,4 +11,6 @@ using namespace std;
 Heloc::Heloc(int accountNumberIn)
 {
 	accountNumber = accountNumberIn;
+	annualInterestRate = 1; //Set this to a reasonable value.
 }
+
