@@ -11,7 +11,7 @@
 #include "Transaction.h"
 using namespace std;
 
-class Checking : public Base {
+class CheckingAccount : public Base {
 public:
 	Transaction Deposit(double);
 	Transaction Withdrawal(double);
