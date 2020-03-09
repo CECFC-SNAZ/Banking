@@ -37,7 +37,7 @@ bool TransactionStorage::checkFile(string fileName)
 	return check;
 }
 
-double TransactionStorage::initializeAccount(int accountNum)
+void TransactionStorage::initializeAccount(int accountNum)
 {
 	accountNumber = accountNum;
 }

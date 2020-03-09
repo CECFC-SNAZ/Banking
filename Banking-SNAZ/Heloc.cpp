@@ -14,3 +14,7 @@ Heloc::Heloc(int accountNumberIn)
 	annualInterestRate = 1; //Set this to a reasonable value.
 }
 
+void Heloc::displayType()
+{
+	cout << "HELOC";
+}

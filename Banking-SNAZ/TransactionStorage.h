@@ -27,7 +27,7 @@ public:
 	//Check for a file's existence
 	bool checkFile(string fileName);
 	//Set the active account
-	double initializeAccount(int accountNum);
+	void initializeAccount(int accountNum);
 	//Read all transactions from the file
 	void readAll();
 	//Find all transactions matching the active account

@@ -1,0 +1,7 @@
+﻿Account.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall Base::displayType(void)" (?displayType@Base@@UAEXXZ)
+BaseClass.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall Base::displayType(void)" (?displayType@Base@@UAEXXZ)
+Checking.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall Base::displayType(void)" (?displayType@Base@@UAEXXZ)
+Heloc.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall Base::displayType(void)" (?displayType@Base@@UAEXXZ)
+Account.obj : error LNK2001: unresolved external symbol "private: static int Account::totalAccounts" (?totalAccounts@Account@@0HA)
+Heloc.obj : error LNK2001: unresolved external symbol "public: static float Base::annualInterestRate" (?annualInterestRate@Base@@2MA)
+C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Debug\Banking-SNAZ.exe : fatal error LNK1120: 3 unresolved externals

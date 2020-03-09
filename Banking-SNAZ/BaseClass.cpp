@@ -8,17 +8,15 @@ March 4, 2020
 
 #define elif else if
 
-
-  Base::Base() {
-      entryTime.tm_min = 0;
-      entryTime.tm_hour = 0;
-      entryTime.tm_mday = 0;
-      entryTime.tm_mon = 0;
-      entryTime.tm_year = 0;
-}
-
-Base::Base(double bal) {
-  balance = bal;
+Base::Base(double bal, int accountNumberi)
+{
+    accountNumber = accountNumberi;
+    balance = bal;
+    entryTime.tm_min = 0;
+    entryTime.tm_hour = 0;
+    entryTime.tm_mday = 0;
+    entryTime.tm_mon = 0;
+    entryTime.tm_year = 0;
 }
 
 bool Base::withdrawal(double amount)
@@ -139,10 +137,11 @@ void Base::displayTransactions()
 
 void Base::menu()
 {
-    displayType();
     int choice;
     double amount;
     bool valid = true, exit = false;
+    displayType();
+    cout << "\nCurrent balance: " << balance;
     while (!exit)
     {
         do
@@ -170,6 +169,7 @@ void Base::menu()
                 break;
             case 3:
                 displayTransactions();
+                valid = true;
                 break;
             case 4:
                 valid = true;

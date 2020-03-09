@@ -6,8 +6,13 @@
 #include "Checking.h"
 using namespace std;
 
-CheckingAccount::CheckingAccount() {
+/*CheckingAccount::CheckingAccount() {
 	annualInterestRate = 0;
+}*/
+
+CheckingAccount::CheckingAccount(double bal, int accountNumberi)
+{
+	
 }
 
 Transaction CheckingAccount::Deposit(double inp) {

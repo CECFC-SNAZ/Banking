@@ -23,13 +23,17 @@ protected:
     entrystruct entryTime;
 public:
     Base() { depositfees = 0, checkfees = 0, overdraftfee = 0, latefee = 0, earlywithdrawfee = 0, totalfees = 0; }
-    Base(double bal);
+    Base(double bal, int accountNumberi);
     ~Base() {}
     //Withdraw funds. Returns true if withdrawal was accepted, or false if the withdrawal was denied.
     bool withdrawal(double amount);
     //Deposit funds
     void deposit(double amount);
-    double get_balance() const;
+    //Returns the current account balance
+    double get_balance() const
+    {
+        return balance;
+    }
     void calcDeposit(double);
     void calcCheck(double);
     //Determines the fee owed on an overdraft and applies this fee

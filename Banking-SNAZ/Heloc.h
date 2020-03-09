@@ -15,5 +15,6 @@ private:
 	float interestRate;
 public:
 	Heloc(int accountNumberIn);
-	void
+	//cout account type
+	void displayType();
 };

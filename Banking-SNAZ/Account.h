@@ -34,12 +34,14 @@ private:
 	{
 		string aname, ausername, apassword;
 		int aaccountNumber;
+		double balance;
 		vector<accountID> aaccountIDs;
 	};
 	struct accountStorage
 	{
 		char sname[40], suserName[40], spassword[40];
 		int saccountNuber, index;
+		double balance;
 		accountID saccountIDs[10];
 		bool filled = false;
 	};

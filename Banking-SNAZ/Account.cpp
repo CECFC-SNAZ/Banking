@@ -20,7 +20,7 @@ void Account::useSaved()
 		fstream inputFile;
 		inputFile.open("userAccounts.dat", ios::in | ios::binary);
 		inputFile.read(reinterpret_cast<char*>(availableAccounts), sizeof(availableAccounts));
-		inputFile.close;
+		inputFile.close();
 	}
 }
 
@@ -94,6 +94,7 @@ void Account::createAccount()
 			invalid = true;
 		}
 	}
+	userAccount.balance = 0;
 	cls();
 }
 
@@ -117,6 +118,7 @@ void Account::signIn()
 			userAccount.ausername = availableAccounts[index].suserName;
 			userAccount.apassword = availableAccounts[index].spassword;
 			userAccount.aaccountNumber = availableAccounts[index].saccountNuber;
+			userAccount.balance = availableAccounts[index].balance;
 			userAccount.aaccountIDs.clear();
 			for (int i = 0; i < 10; i++)
 			{
@@ -161,10 +163,11 @@ int Account::searchAccountInfo(string username, string password)
 void Account::storeAccountInfo()
 {
 	accountStorage storeAccount;
-	strcpy(storeAccount.sname, userAccount.aname.c_str());
-	strcpy(storeAccount.suserName, userAccount.ausername.c_str());
-	strcpy(storeAccount.spassword, userAccount.apassword.c_str());
+	strcpy_s(storeAccount.sname, 40 , userAccount.aname.c_str());
+	strcpy_s(storeAccount.suserName, 40 , userAccount.ausername.c_str());
+	strcpy_s(storeAccount.spassword, 40 , userAccount.apassword.c_str());
 	storeAccount.saccountNuber = userAccount.aaccountNumber;
+	storeAccount.balance = userAccount.balance;
 	for (int i = 0; i < userAccount.aaccountIDs.size() || i <= 10; i++)
 	{
 		storeAccount.saccountIDs[i] = userAccount.aaccountIDs[i];
@@ -201,7 +204,7 @@ void Account::saveAccounts()
 	fstream storefile;
 	storefile.open("UserAccounts.dat", ios::out | ios::binary);
 	storefile.write(reinterpret_cast<char*>(saveAccounts), sizeof(saveAccounts));
-	storefile.close;
+	storefile.close();
 }
 
 void Account::accessAccounts()
@@ -260,7 +263,7 @@ void Account::accessAccounts()
 	}
 	if (userAccount.aaccountIDs[choice].type == CHECKING)
 	{
-		Checking checking;
+		CheckingAccount checking(userAccount.balance, userAccount.aaccountIDs[choice].IDnumber);
 	}
 	elif (userAccount.aaccountIDs[choice].type == SAVINGS)
 	{
