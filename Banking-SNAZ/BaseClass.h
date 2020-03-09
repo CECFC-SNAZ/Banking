@@ -19,7 +19,7 @@ protected:
     int accountNumber;
     int numWithdrawals, withdrawLimit;
     double balance;
-    double depositfees, checkfees, overdraftfee, overdraftInterest, latefee, earlywithdrawfee, totalfees;
+    double depositfees, checkfees, overdraftfee, overdraftInterest, latefee, earlywithdrawfee, totalfees, monthlyFee;
     entrystruct entryTime;
 public:
     Base() { depositfees = 0, checkfees = 0, overdraftfee = 0, latefee = 0, earlywithdrawfee = 0, totalfees = 0; }
@@ -60,5 +60,10 @@ public:
    void menu();
    //cout the type of account that is currently active (must be defined for each account)
    virtual void displayType();
+   //Sets the monthly fee for the account
+   void setMonthlyFee(double fee)
+   {
+       monthlyFee = fee;
+   }
 };
 
