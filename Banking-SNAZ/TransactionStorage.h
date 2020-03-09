@@ -10,6 +10,7 @@ This class stores and searches all transactions made
 #include "Transaction.h"
 #include <sys/stat.h>
 #include <iostream>
+#include <string>
 using namespace std;
 
 class TransactionStorage

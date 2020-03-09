@@ -52,5 +52,9 @@ public:
    timeStruct getTime();
    //Displays all transactions associated with the account
    void displayTransactions();
+   //Main menu for accessing the account's features
+   void menu();
+   //cout the type of account that is currently active (must be defined for each account)
+   virtual void displayType();
 };
 

@@ -73,6 +73,7 @@ void TransactionStorage::findAccountTransactions()
 
 void TransactionStorage::displayAccountTransactions()
 {
+	string ch;
 	for (int i = 0; i < thisAccountTransactions.size(); i++)
 	{
 		timeStruct time = thisAccountTransactions[i].getTime();
@@ -95,6 +96,8 @@ void TransactionStorage::displayAccountTransactions()
 			<< "\nPrevious balance: " << thisAccountTransactions[i].getPrevBalance()
 			<< "\nNew account balance: " << thisAccountTransactions[i].getPrevBalance() << "\n\n";
 	}
+	cout << "\n\n\nPress \"Enter\" to exit: ";
+	getline(cin, ch);
 }
 
 void TransactionStorage::withdrawal(timeStruct timeIn, double amount, int ID, double pBal, double nBal)

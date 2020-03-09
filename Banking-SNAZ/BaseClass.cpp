@@ -136,3 +136,48 @@ void Base::displayTransactions()
     cout << "\n\n\nPress \"Enter\" to return to the main menu: ";
     cin >> ch;
 }
+
+void Base::menu()
+{
+    displayType();
+    int choice;
+    double amount;
+    bool valid = true, exit = false;
+    while (!exit)
+    {
+        do
+        {
+            if (!valid)
+            {
+                cout << "Invalid selection.\n\n";
+            }
+            cout << " account\n#" << accountNumber << "1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
+                <<"\n4 - Exit to main menu\nChoice:";
+            cin >> choice;
+            switch (choice)
+            {
+            case 1:
+                cout << "Enter the amount you want to withdraw: ";
+                cin >> amount;
+                withdrawal(amount);
+                valid = true;
+                break;
+            case 2:
+                cout << "Enter the amount you want to deposit: ";
+                cin >> amount;
+                deposit(amount);
+                valid = true;
+                break;
+            case 3:
+                displayTransactions();
+                break;
+            case 4:
+                valid = true;
+                exit = true;
+                break;
+            default:
+                valid = false;
+            }
+        } while (!valid);
+    }
+}
