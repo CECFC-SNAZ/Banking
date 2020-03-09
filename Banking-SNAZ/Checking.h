@@ -12,18 +12,9 @@
 using namespace std;
 
 class CheckingAccount : public Base {
-private:
-	static float annualInterestRate;
-	double overdraftfee = 0;
 public:
 	CheckingAccount(double bal, int accountNumberi);
-	Transaction Deposit(double);
-	Transaction Withdrawal(double);
-	//cout account type
-	void displayType()
-	{
-		cout << "Checking";
-	}
+	void displayType() { cout << "Checking"; }
 };
 
 #endif CHECKING_H
