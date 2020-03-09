@@ -144,6 +144,7 @@
     <ClInclude Include="Cls.h" />
     <ClInclude Include="Heloc.h" />
     <ClInclude Include="Transaction.h" />
+    <ClInclude Include="TransactionStorage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Heloc.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Transaction.cpp" />
+    <ClCompile Include="TransactionStorage.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
