@@ -8,8 +8,10 @@ using namespace std;
 
 CheckingAccount::CheckingAccount(double bal, int accountNumberi)
 {
-	setOverdraft(0, 0);
-	setWithdrawLimit(2147483647);
+	annualInterestRate = 0;
+	overdraftfee = 0;
+	withdrawLimit = 2147483647;
+	monthlyFee = 0;
 	balance = bal;
 	accountNumber = accountNumberi;
 }
