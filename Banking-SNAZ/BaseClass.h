@@ -18,6 +18,7 @@ protected:
     TransactionStorage transactionStorage;
     int accountNumber;
     int numWithdrawals, withdrawLimit;
+    float annualInterestRate;
     double balance;
     double depositfees, checkfees, overdraftfee, overdraftInterest, latefee, earlywithdrawfee, totalfees, monthlyFee;
     entrystruct entryTime;
@@ -41,8 +42,11 @@ public:
     void calcLate(double);
     void calcEarlywithdraw(double);
     void calcMonthInt();
-    static float annualInterestRate;
-    static void modifyIntRate(double value);
+    //Set the interest rate for an account
+    void setIntRate(double rate)
+    {
+        annualInterestRate = rate;
+    }
     void displayFee();
     void setEntryTime(entrystruct enteredtime) { entryTime = enteredtime; }
    entrystruct getEntryTime() { return entryTime; }
