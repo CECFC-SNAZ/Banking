@@ -9,6 +9,7 @@ Prototypes for the Account class
 #include "BaseClass.h"
 #include "Cls.h"
 #include "Checking.h"
+#include "Heloc.h"
 #include <iostream>
 #include <vector>
 #include <string>

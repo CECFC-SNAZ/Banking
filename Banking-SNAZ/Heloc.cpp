@@ -8,13 +8,51 @@ Function definitios for the Heloc class
 #include "Heloc.h"
 using namespace std;
 
-Heloc::Heloc(int accountNumberIn)
+#define elif else if
+
+Heloc::Heloc(double bal, int accountNumberIn) : Base(bal, accountNumberIn)
 {
-	accountNumber = accountNumberIn;
-	annualInterestRate = 1; //Set this to a reasonable value.
+
 }
 
-void Heloc::displayType()
+bool Heloc::withdrawal(double amount)
 {
-	cout << "HELOC";
+    double pBal = balance;
+    timeStruct storeTime = getTime();
+    if (withdrawLimit > 0)
+    {//Change from withdrawal limit to max withdrawal amount
+        if ((balance - amount) < 0 && numWithdrawals < withdrawLimit)
+        {
+            calcOverdraft(amount - balance);
+            transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
+            numWithdrawals++;
+            return true;
+        }
+        elif((balance - amount) >= 0 && numWithdrawals < withdrawLimit)
+        {
+            balance -= amount;
+            transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
+            numWithdrawals++;
+            return true;
+        }
+        return false;
+    }
+    else
+    {
+        if ((balance - amount) < 0)
+        {
+            calcOverdraft(amount - balance);
+            transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
+            numWithdrawals++;
+            return true;
+        }
+        elif((balance - amount) >= 0)
+        {
+            balance -= amount;
+            transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
+            numWithdrawals++;
+            return true;
+        }
+        return false;
+    }
 }

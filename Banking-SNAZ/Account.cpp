@@ -271,7 +271,7 @@ void Account::accessAccounts()
 	}
 	elif (userAccount.aaccountIDs[choice].type == HELOC)
 	{
-		//HELOC
+		Heloc heloc(userAccount.balance, userAccount.aaccountIDs[choice].IDnumber);
 	}
 	elif(userAccount.aaccountIDs[choice].type == CD)
 	{

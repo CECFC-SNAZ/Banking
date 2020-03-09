@@ -14,7 +14,12 @@ class Heloc : public Base
 private:
 	float interestRate;
 public:
-	Heloc(int accountNumberIn);
+	Heloc(double bal, int accountNumberIn);
+	//Withdraw funds from the line of credit
+	bool withdrawal(double amount);
 	//cout account type
-	void displayType();
+	void displayType()
+	{
+		cout << "HELOC";
+	}
 };
