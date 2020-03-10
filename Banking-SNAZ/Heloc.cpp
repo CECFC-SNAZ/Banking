@@ -15,6 +15,7 @@ Heloc::Heloc(double bal, int accountNumberIn) : Base(bal, accountNumberIn)
     interestRate = 0.1;
     amountOwed = 0;
     balance = 5000;
+    maxWithdrawAmount = 500;
 }
 
 bool Heloc::withdrawal(double amount)
@@ -22,14 +23,13 @@ bool Heloc::withdrawal(double amount)
     string ch;
     double pBal = balance;
     timeStruct storeTime = getTime();
-    if (withdrawLimit > 0)
-    {//Change from withdrawal limit to max withdrawal amount
-        if ((balance - amount) < 0 || amount < maxWithdrawAmount)
+        if ((balance - amount) < 0 || amount > maxWithdrawAmount)
         {
             cout << "Error, not enough funds for withdrawal or the maximum withdrawal amount was exceeded.\nPress \"Enter\"to countinue: ";
+            cin.ignore();
             getline(cin, ch);
         }
-        elif((balance - amount) >= 0 && numWithdrawals < withdrawLimit)
+        else
         {
             balance -= amount;
             amountOwed += (amount + (amount * interestRate));
@@ -38,14 +38,13 @@ bool Heloc::withdrawal(double amount)
             return true;
         }
         return false;
-    }
 }
 
 void Heloc::deposit(double amount)
 {
     double pBal = amountOwed;
     timeStruct storeTime = getTime();
-    amountOwed += amount;
+    amountOwed -= amount;
     transactionStorage.deposit(storeTime, amount, accountNumber, pBal, amountOwed);
 }
 

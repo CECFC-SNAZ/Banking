@@ -97,6 +97,7 @@ void TransactionStorage::displayAccountTransactions()
 			<< "\nNew account balance: " << thisAccountTransactions[i].getPrevBalance() << "\n\n";
 	}
 	cout << "\n\n\nPress \"Enter\" to exit: ";
+	cin.ignore();
 	getline(cin, ch);
 }
 

@@ -37,75 +37,84 @@ void Account::useSaved()
 void Account::createAccount()
 {
 	cls();
-	int choice;
-	bool exists = true, invalid = false, exit = false;
-	string tempUsername;
-	accountID tempID;
-	cout << "Enter your name: ";
-	cin.ignore();
-	getline(cin, userAccount.aname);
-	while (exists == true)
+	string ch;
+	if (totalAccounts > 10)
 	{
-		exists = false;
-		cout << "\n\nEnter a new username: ";
-		getline(cin, tempUsername);
-		exists = searchUsername(tempUsername);
-		if (exists)
-		{
-			cout << "This username already exists.";
-		}
+		cout << "There is no availability for new accounts.\nPress\"Enter\" to exit: ";
+		getline(cin, ch);
 	}
-	userAccount.aname = tempUsername;
-	cout << "\n\nEnter a new password: ";
-	cin >> userAccount.apassword;
-	userAccount.aaccountNumber = totalAccounts + 1;
-	totalAccounts += 1;
-	while (!exit)
+	else
 	{
-		if (invalid)
+		int choice;
+		bool exists = true, invalid = false, exit = false;
+		string tempUsername;
+		accountID tempID;
+		cout << "Enter your name: ";
+		cin.ignore();
+		getline(cin, userAccount.aname);
+		while (exists == true)
 		{
-			cout << "\n\nInvalid selection.\n\n";
+			exists = false;
+			cout << "\n\nEnter a new username: ";
+			getline(cin, tempUsername);
+			exists = searchUsername(tempUsername);
+			if (exists)
+			{
+				cout << "This username already exists.";
+			}
 		}
-		cout << "\n\nWhich kinds of account do you want to open?:\n1 - Checking\n2 - Savings\n3 - HELOC\n4 - CD\n5 - Finished opening accounts."
-			<< " Note, you may open up to ten accounts of any type.\nChoice: ";
-		cin >> choice;
-		switch (choice)
+		userAccount.aname = tempUsername;
+		cout << "\n\nEnter a new password: ";
+		cin >> userAccount.apassword;
+		userAccount.aaccountNumber = totalAccounts + 1;
+		totalAccounts += 1;
+		while (!exit)
 		{
-		case 1:
-			tempID.type = CHECKING;
-			tempID.IDnumber = totalAccounts + 1;
-			totalAccounts += 1;
-			userAccount.aaccountIDs.push_back(tempID);
-			invalid = false;
-			break;
-		case 2:
-			tempID.type = SAVINGS;
-			tempID.IDnumber = totalAccounts + 1;
-			totalAccounts += 1;
-			userAccount.aaccountIDs.push_back(tempID);
-			invalid = false;
-			break;
-		case 3:
-			tempID.type = HELOC;
-			tempID.IDnumber = totalAccounts + 1;
-			totalAccounts += 1;
-			userAccount.aaccountIDs.push_back(tempID);
-			invalid = false;
-			break;
-		case 4:
-			tempID.type = CD;
-			tempID.IDnumber = totalAccounts + 1;
-			totalAccounts += 1;
-			userAccount.aaccountIDs.push_back(tempID);
-			invalid = false;
-		case 5:
-			exit = true;
-			break;
-		default:
-			invalid = true;
+			if (invalid)
+			{
+				cout << "\n\nInvalid selection.\n\n";
+			}
+			cout << "\n\nWhich kinds of account do you want to open?:\n1 - Checking\n2 - Savings\n3 - HELOC\n4 - CD\n5 - Finished opening accounts."
+				<< " Note, you may open up to ten accounts of any type.\nChoice: ";
+			cin >> choice;
+			switch (choice)
+			{
+			case 1:
+				tempID.type = CHECKING;
+				tempID.IDnumber = totalAccounts + 1;
+				totalAccounts += 1;
+				userAccount.aaccountIDs.push_back(tempID);
+				invalid = false;
+				break;
+			case 2:
+				tempID.type = SAVINGS;
+				tempID.IDnumber = totalAccounts + 1;
+				totalAccounts += 1;
+				userAccount.aaccountIDs.push_back(tempID);
+				invalid = false;
+				break;
+			case 3:
+				tempID.type = HELOC;
+				tempID.IDnumber = totalAccounts + 1;
+				totalAccounts += 1;
+				userAccount.aaccountIDs.push_back(tempID);
+				invalid = false;
+				break;
+			case 4:
+				tempID.type = CD;
+				tempID.IDnumber = totalAccounts + 1;
+				totalAccounts += 1;
+				userAccount.aaccountIDs.push_back(tempID);
+				invalid = false;
+			case 5:
+				exit = true;
+				break;
+			default:
+				invalid = true;
+			}
 		}
+		userAccount.balance = 0;
 	}
-	userAccount.balance = 0;
 	cls();
 }
 
@@ -223,7 +232,7 @@ void Account::saveAccounts()
 	accountStorage saveAccounts[10];
 	for (int i = 0; i < accountsForStorage.size(); i++)
 	{
-		saveAccounts[i] = accountsForStorage[i];
+		saveAccounts[accountsForStorage[i].saccountNuber - 1] = accountsForStorage[i];
 	}
 	fstream storefile;
 	storefile.open("UserAccounts.dat", ios::out | ios::binary);
@@ -264,7 +273,7 @@ int Account::accessAccounts()
 			cout << userAccount.aaccountIDs[i].IDnumber << "\n";
 			index = i;
 		}
-		while ((choice - 1) < 0 || (choice - 1) > index)
+		while ((choice - 1) < 0 || (choice - 1) > index + 2)
 		{
 			cout << "Select an account to access or enter " << index + 2 << " to exit: ";
 			cin >> choice;

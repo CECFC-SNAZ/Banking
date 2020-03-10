@@ -1,14 +1,4 @@
-﻿  Account.cpp
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\BaseClass.h(48,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Account.cpp(195,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Account.cpp(224,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Account.cpp(244,21): warning C4018: '<': signed/unsigned mismatch
-  Heloc.cpp
+﻿  Heloc.cpp
 C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\BaseClass.h(48,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Heloc.cpp(15,23): warning C4305: '=': truncation from 'double' to 'float'
-  Source.cpp
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\BaseClass.h(48,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Heloc.cpp(42): warning C4715: 'Heloc::withdrawal': not all control paths return a value
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Account.cpp(318): warning C4715: 'Account::accessAccounts': not all control paths return a value
   Banking-SNAZ.vcxproj -> C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Debug\Banking-SNAZ.exe
