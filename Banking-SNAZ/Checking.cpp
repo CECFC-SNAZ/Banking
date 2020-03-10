@@ -10,7 +10,8 @@ CheckingAccount::CheckingAccount(double bal, int accountNumberi) : Base(bal, acc
 {
 	annualInterestRate = 0;
 	overdraftfee = 0;
-	withdrawLimit = 2147483647;
+	overdraftInterest = 0;
+	withdrawLimit = 0;
 	monthlyFee = 0;
 }
 
