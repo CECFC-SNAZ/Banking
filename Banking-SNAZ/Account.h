@@ -21,7 +21,7 @@ class Account
 {
 private:
 	
-	static int totalAccounts, totalAccountIDs;
+	int totalAccounts, totalAccountIDs;
 	enum accountTypes
 	{
 		CHECKING, SAVINGS, CD, HELOC
@@ -57,7 +57,7 @@ public:
 	//Gather information and create a new account (note: either createAccount or signIn is used to set the initial active account, not both)
 	void createAccount();
 	//Allow the user to sign in
-	void signIn();
+	bool signIn();
 	//Search file for given username. Returns true if the account exists.
 	bool searchUsername(string username);
 	//Search file for given account username and password. Returns the index of the account if it is found, or -1 if not found.
@@ -69,5 +69,5 @@ public:
 	//Save all accounts to a file
 	void saveAccounts();
 	//Access user's banking accounts (Most user input will be handled here)
-	void accessAccounts();
+	int accessAccounts();
 };

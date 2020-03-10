@@ -20,7 +20,7 @@ protected:
     int numWithdrawals, withdrawLimit;
     float annualInterestRate;
     double balance;
-    double depositfees, checkfees, overdraftfee, overdraftInterest, latefee, earlywithdrawfee, totalfees, monthlyFee;
+    double depositfees, checkfees, overdraftfee, overdraftInterest, latefee, earlywithdrawfee, totalfees, monthlyFee, maxWithdrawAmount;
     entrystruct entryTime;
 public:
     Base() { depositfees = 0, checkfees = 0, overdraftfee = 0, latefee = 0, earlywithdrawfee = 0, totalfees = 0; }
@@ -63,11 +63,19 @@ public:
    //Main menu for accessing the account's features
    void menu();
    //cout the type of account that is currently active (must be defined for each account)
-   virtual void displayType();
+   void displayType()
+   {
+       cout << "Error, type not found.";
+   }
    //Sets the monthly fee for the account
    void setMonthlyFee(double fee)
    {
        monthlyFee = fee;
+   }
+   //Sets the maximum amount that may be withdrawn at one time
+   void setMaxWithdrawAmount(double amount)
+   {
+       maxWithdrawAmount = amount;
    }
 };
 

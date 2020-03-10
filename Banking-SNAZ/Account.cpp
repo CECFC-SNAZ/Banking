@@ -10,7 +10,15 @@ using namespace std;
 
 Account::Account()
 {
-	
+	if (checkFile("userAccounts.dat"))
+	{
+		useSaved();
+	}
+	else
+	{
+		totalAccounts = 0;
+		totalAccountIDs = 0;
+	}
 }
 
 void Account::useSaved()
@@ -20,6 +28,8 @@ void Account::useSaved()
 		fstream inputFile;
 		inputFile.open("userAccounts.dat", ios::in | ios::binary);
 		inputFile.read(reinterpret_cast<char*>(availableAccounts), sizeof(availableAccounts));
+		inputFile.read(reinterpret_cast<char*>(totalAccounts), sizeof(totalAccounts));
+		inputFile.read(reinterpret_cast<char*>(totalAccountIDs), sizeof(totalAccountIDs));
 		inputFile.close();
 	}
 }
@@ -32,12 +42,13 @@ void Account::createAccount()
 	string tempUsername;
 	accountID tempID;
 	cout << "Enter your name: ";
-	cin >> userAccount.aname;
+	cin.ignore();
+	getline(cin, userAccount.aname);
 	while (exists == true)
 	{
 		exists = false;
 		cout << "\n\nEnter a new username: ";
-		cin >> tempUsername;
+		getline(cin, tempUsername);
 		exists = searchUsername(tempUsername);
 		if (exists)
 		{
@@ -55,7 +66,7 @@ void Account::createAccount()
 		{
 			cout << "\n\nInvalid selection.\n\n";
 		}
-		cout << "\n\nWhich kinds of account do you want to open?\n:1 - Checking\n2 - Savings\n3 - HELOC\n4 - CD\n5 - Finished opening accounts."
+		cout << "\n\nWhich kinds of account do you want to open?:\n1 - Checking\n2 - Savings\n3 - HELOC\n4 - CD\n5 - Finished opening accounts."
 			<< " Note, you may open up to ten accounts of any type.\nChoice: ";
 		cin >> choice;
 		switch (choice)
@@ -98,42 +109,55 @@ void Account::createAccount()
 	cls();
 }
 
-void Account::signIn()
+bool Account::signIn()
 {
 	cls();
 	string tempUsername, tempPassword;
 	int index;
-	bool exists = false;
-	while (!exists)
+	bool exists = false, retval = false;
+	if (checkFile("userAccounts.dat"))
 	{
-		cout << "Enter your username: ";
-		cin >> tempUsername;
-		cout << "\nEnter your password: ";
-		cin >> tempPassword;
-		//Search stored files for an account with this info
-		index = searchAccountInfo(tempUsername, tempPassword);
-		if (index >= 0)
+		while (!exists)
 		{
-			userAccount.aname = availableAccounts[index].sname;
-			userAccount.ausername = availableAccounts[index].suserName;
-			userAccount.apassword = availableAccounts[index].spassword;
-			userAccount.aaccountNumber = availableAccounts[index].saccountNuber;
-			userAccount.balance = availableAccounts[index].balance;
-			userAccount.aaccountIDs.clear();
-			for (int i = 0; i < 10; i++)
+			cout << "Enter your username: ";
+			cin >> tempUsername;
+			cout << "\nEnter your password: ";
+			cin >> tempPassword;
+			//Search stored files for an account with this info
+			index = searchAccountInfo(tempUsername, tempPassword);
+			if (index >= 0)
 			{
-				//Add check for ID existance
-				userAccount.aaccountIDs.push_back(availableAccounts[index].saccountIDs[i]);
+				userAccount.aname = availableAccounts[index].sname;
+				userAccount.ausername = availableAccounts[index].suserName;
+				userAccount.apassword = availableAccounts[index].spassword;
+				userAccount.aaccountNumber = availableAccounts[index].saccountNuber;
+				userAccount.balance = availableAccounts[index].balance;
+				userAccount.aaccountIDs.clear();
+				for (int i = 0; i < 10; i++)
+				{
+					//Add check for ID existance
+					userAccount.aaccountIDs.push_back(availableAccounts[index].saccountIDs[i]);
+				}
+				exists = true;
 			}
-			exists = true;
-		}
-		else
-		{
-			cout << "\n\nYour username or password is incorrect.\n\n";
-			exists = false;
+			else
+			{
+				cout << "\n\nYour username or password is incorrect.\n\n";
+				exists = false;
+			}
+			retval = true;
 		}
 	}
+	else
+	{
+		cout << "There are no accounts created yet.\nPress \"Enter\" to exit: ";
+		cin.ignore();
+		getline(cin, tempUsername);
+		retval = false;
+		
+	}
 	cls();
+	return retval;
 }
 
 bool Account::searchUsername(string username)
@@ -204,77 +228,91 @@ void Account::saveAccounts()
 	fstream storefile;
 	storefile.open("UserAccounts.dat", ios::out | ios::binary);
 	storefile.write(reinterpret_cast<char*>(saveAccounts), sizeof(saveAccounts));
+	storefile.write(reinterpret_cast<char*>(totalAccounts), sizeof(totalAccounts));
+	storefile.write(reinterpret_cast<char*>(totalAccountIDs), sizeof(totalAccountIDs));
 	storefile.close();
 }
 
-void Account::accessAccounts()
+int Account::accessAccounts()
 {
-	int choice = -1, index = 0;
 	string ch;
-	cout << "Available accounts: \n";
-	for (int i = 0; i < userAccount.aaccountIDs.size(); i++)
+	bool exit = false;
+	while (!exit)
 	{
-		cout << i + 1 << " - ";
-		switch (userAccount.aaccountIDs[i].type)
+		int choice = -1, index = 0;
+		cout << "Available accounts: \n";
+		for (int i = 0; i < userAccount.aaccountIDs.size(); i++)
+		{
+			cout << i + 1 << " - ";
+			switch (userAccount.aaccountIDs[i].type)
+			{
+			case CHECKING:
+				cout << "Checking Account #";
+				break;
+			case SAVINGS:
+				cout << "Savings Account #";
+				break;
+			case CD:
+				cout << "CD Account #";
+				break;
+			case HELOC:
+				cout << "HELOC Account #";
+				break;
+			default:
+				cout << "Account ID error.";
+			}
+			cout << userAccount.aaccountIDs[i].IDnumber << "\n";
+			index = i;
+		}
+		while ((choice - 1) < 0 || (choice - 1) > index)
+		{
+			cout << "Select an account to access or enter " << index + 2 << " to exit: ";
+			cin >> choice;
+			if ((choice - 1) < 0 || (choice - 1) > index + 2)
+			{
+				cout << "\n\nInvalid selection.\n\n";
+			}
+		}
+		if (choice == index + 2)
+		{
+			return 0;
+		}
+		switch (userAccount.aaccountIDs[choice - 1].type)
 		{
 		case CHECKING:
-			cout << "Checking Account #";
 			break;
 		case SAVINGS:
 			cout << "Savings Account #";
 			break;
 		case CD:
-			cout << "HELOC Account #";
-			break;
-		case HELOC:
 			cout << "CD Account #";
 			break;
+		case HELOC:
+			cout << "HELOC Account #";
+			break;
 		default:
-			cout << "Account ID error.";
+			cout << "Account ID error.\n\nPress enter to continue.";
+			getline(cin, ch);
 		}
-		cout << userAccount.aaccountIDs[i].IDnumber << "\n";
-		index = i;
-	}
-	while ((choice - 1) < 0 || (choice - 1) > index)
-	{
-		cout << "Select an account to access: ";
-		cin >> choice;
-		if ((choice - 1) < 0 || (choice - 1) > index)
+		if (userAccount.aaccountIDs[choice - 1].type == CHECKING)
 		{
-			cout << "\n\nInvalid selection.\n\n";
+			CheckingAccount checking(userAccount.balance, userAccount.aaccountIDs[choice].IDnumber);
+		}
+		elif(userAccount.aaccountIDs[choice - 1].type == SAVINGS)
+		{
+			//Savings
+		}
+		elif(userAccount.aaccountIDs[choice - 1].type == HELOC)
+		{
+			cls();
+			Heloc heloc(userAccount.balance, userAccount.aaccountIDs[choice - 1].IDnumber);
+			heloc.menu();
+		}
+		elif(userAccount.aaccountIDs[choice - 1].type == CD)
+		{
+			//CD
 		}
 	}
-	switch (userAccount.aaccountIDs[choice].type)
-	{
-	case CHECKING:
-		break;
-	case SAVINGS:
-		cout << "Savings Account #";
-		break;
-	case CD:
-		cout << "HELOC Account #";
-		break;
-	case HELOC:
-		cout << "CD Account #";
-		break;
-	default:
-		cout << "Account ID error.\n\nPress enter to continue.";
-		getline(cin, ch);
-	}
-	if (userAccount.aaccountIDs[choice].type == CHECKING)
-	{
-		CheckingAccount checking(userAccount.balance, userAccount.aaccountIDs[choice].IDnumber);
-	}
-	elif (userAccount.aaccountIDs[choice].type == SAVINGS)
-	{
-		//Savings
-	}
-	elif (userAccount.aaccountIDs[choice].type == HELOC)
-	{
-		Heloc heloc(userAccount.balance, userAccount.aaccountIDs[choice].IDnumber);
-	}
-	elif(userAccount.aaccountIDs[choice].type == CD)
-	{
-		//CD
-	}
+	storeAccountInfo();
+	saveAccounts();
 }
