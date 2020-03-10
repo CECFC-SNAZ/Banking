@@ -3,7 +3,6 @@
 // 28 February 2020
 // Function definitions for the transaction class + the getTime() function
 
-#define _CRT_SECURE_NO_WARNINGS
 #include "Transaction.h"
 #include <iostream>
 #include <ctime>
@@ -12,9 +11,11 @@ using namespace std;
 
 const bool debug = false;
 
-timeStruct getTime(){
+timeStruct _getTime(){
 	time_t t = time(0);
+#define _CRT_SECURE_NO_WARNINGS
 	tm* now = localtime(&t);
+#undef _CRT_SECURE_NO_WARNINGS
 	return { now->tm_year + 1900, now->tm_mon + 1, now->tm_mday, now->tm_hour, now->tm_min, now->tm_sec };
 }
 

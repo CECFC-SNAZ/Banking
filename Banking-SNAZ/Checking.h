@@ -8,7 +8,6 @@
 #define CHECKING_H
 
 #include "BaseClass.h"
-#include "Transaction.h"
 using namespace std;
 
 class CheckingAccount : public Base {
