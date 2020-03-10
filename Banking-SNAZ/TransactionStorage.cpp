@@ -11,6 +11,7 @@ using namespace std;
 
 TransactionStorage::TransactionStorage()
 {
+	//Can't just be ios::in !!
 	transactionFile.open("transactions.dat", ios::in | ios::binary);
 }
 

@@ -34,7 +34,6 @@ bool Heloc::withdrawal(double amount)
             balance -= amount;
             amountOwed += (amount + (amount * interestRate));
             transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
-            numWithdrawals++;
             return true;
         }
         return false;
