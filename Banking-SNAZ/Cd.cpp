@@ -74,48 +74,9 @@ timeStruct CD::getTimeStruct() {
 	return tmpTimeStruct;
 }
 
-bool CD::withdrawal(double amount) : bool withdrawal(amount)
-{
-	double pBal = balance;
-	timeStruct storeTime = getTime();
-	if (withdrawLimit > 0)
-	{
-		if ((balance - amount) < 0 && numWithdrawals < withdrawLimit)
-		{
-			if (isEarly()) balance -= earlywithdrawfee;
-			calcOverdraft(amount - balance);
-			transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
-			numWithdrawals++;
-			return true;
-		}
-		elif((balance - amount) >= 0 && numWithdrawals < withdrawLimit)
-		{
-			if (isEarly()) balance -= earlywithdrawfee;
-			balance -= amount;
-			transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
-			numWithdrawals++;
-			return true;
-		}
-		return false;
-	}
-	else
-	{
-		if ((balance - amount) < 0)
-		{
-			if (isEarly()) balance -= earlywithdrawfee;
-			calcOverdraft(amount - balance);
-			transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
-			numWithdrawals++;
-			return true;
-		}
-		elif((balance - amount) >= 0)
-		{
-			if (isEarly()) balance -= earlywithdrawfee;
-			balance -= amount;
-			transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
-			numWithdrawals++;
-			return true;
-		}
-		return false;
-	}
+bool CD::withdrawal(double amount) {
+	bool boolStore;
+	boolStore = Base::withdrawal(amount);
+	if (boolStore && isEarly()) balance -= earlywithdrawfee;
+	return boolStore;
 }
