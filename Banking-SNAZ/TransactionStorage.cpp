@@ -9,16 +9,6 @@ Generates fstream obgect for storing transactions and initializes accounts
 #include "TransactionStorage.h"
 using namespace std;
 
-TransactionStorage::TransactionStorage()
-{
-	//Can't just be ios::in !!
-	transactionFile.open("transactions.dat", ios::in | ios::binary);
-}
-
-TransactionStorage::~TransactionStorage()
-{
-	transactionFile.close();
-}
 
 bool TransactionStorage::checkFile(string fileName)
 {
@@ -45,6 +35,7 @@ void TransactionStorage::initializeAccount(int accountNum)
 
 void TransactionStorage::readAll()
 {
+	transactionFile.open("transactions.dat", ios::in | ios::binary);
 	allTransactions.clear();
 	Transaction tempTrans;
 	Transaction* transptr = nullptr;
@@ -104,12 +95,16 @@ void TransactionStorage::displayAccountTransactions()
 
 void TransactionStorage::withdrawal(timeStruct timeIn, double amount, int ID, double pBal, double nBal)
 {
+	transactionFile.open("transactions.dat", ios::out | ios::binary);
 	Transaction newTransaction(Transaction::Type::Withdrawal, timeIn, amount, ID, pBal, nBal);
 	newTransaction.storeInFile(transactionFile);
+	transactionFile.close();
 }
 
 void TransactionStorage::deposit(timeStruct timeIn, double amount, int ID, double pBal, double nBal)
 {
+	transactionFile.open("transactions.dat", ios::out | ios::binary);
 	Transaction newTransaction(Transaction::Type::Deposit, timeIn, amount, ID, pBal, nBal);
 	newTransaction.storeInFile(transactionFile);
+	transactionFile.close();
 }

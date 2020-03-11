@@ -13,6 +13,7 @@ CheckingAccount::CheckingAccount(double bal, int accountNumberi) : Base(bal, acc
 	overdraftInterest = 0;
 	withdrawLimit = 0;
 	monthlyFee = 0;
+
 }
 
 //Transaction CheckingAccount::Deposit(double inp) {

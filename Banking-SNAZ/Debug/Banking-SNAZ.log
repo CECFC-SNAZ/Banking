@@ -1,4 +1,3 @@
-﻿  Heloc.cpp
+﻿  Checking.cpp
 C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\BaseClass.h(48,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Heloc.cpp(15,23): warning C4305: '=': truncation from 'double' to 'float'
   Banking-SNAZ.vcxproj -> C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Debug\Banking-SNAZ.exe

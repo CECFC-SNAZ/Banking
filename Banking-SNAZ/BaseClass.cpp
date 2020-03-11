@@ -131,8 +131,6 @@ void Base::displayTransactions()
     transactionStorage.readAll();
     transactionStorage.findAccountTransactions();
     transactionStorage.displayAccountTransactions();
-    cout << "\n\n\nPress \"Enter\" to return to the main menu: ";
-    cin >> ch;
 }
 
 void Base::menu()

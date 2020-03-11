@@ -16,6 +16,7 @@ Heloc::Heloc(double bal, int accountNumberIn) : Base(bal, accountNumberIn)
     amountOwed = 0;
     balance = 5000;
     maxWithdrawAmount = 500;
+    transactionStorage.setAccountNumber(accountNumberIn);
 }
 
 bool Heloc::withdrawal(double amount)
