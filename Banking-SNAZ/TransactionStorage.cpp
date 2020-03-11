@@ -112,3 +112,12 @@ void TransactionStorage::deposit(timeStruct timeIn, double amount, int ID, doubl
 	allTransactions.push_back(newTransaction);
 	if (ID == accountNumber) thisAccountTransactions.push_back(newTransaction);
 }
+
+void TransactionStorage::fee(timeStruct timeIn, double amount, int ID, double pBal, double nBal) {
+	transactionFile.open("transactions.dat", ios::out | ios::binary);
+	Transaction newTransaction(Transaction::Type::Fee, timeIn, amount, ID, pBal, nBal);
+	newTransaction.storeInFile(transactionFile);
+	transactionFile.close();
+	allTransactions.push_back(newTransaction);
+	if (ID == accountNumber) thisAccountTransactions.push_back(newTransaction);
+}
