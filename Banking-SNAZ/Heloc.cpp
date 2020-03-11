@@ -24,7 +24,7 @@ bool Heloc::withdrawal(double amount)
     string ch;
     double pBal = balance;
     timeStruct storeTime = getTime();
-        if ((balance - amount) < 0 || amount > maxWithdrawAmount)
+        if ((balance - amount) <= 0 || amount > maxWithdrawAmount)
         {
             cout << "Error, not enough funds for withdrawal or the maximum withdrawal amount was exceeded.\nPress \"Enter\"to countinue: ";
             cin.ignore();

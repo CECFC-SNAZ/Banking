@@ -25,14 +25,14 @@ bool Base::withdrawal(double amount)
     timeStruct storeTime = getTime();
     if (withdrawLimit > 0)
     {
-        if ((balance - amount) < 0 && numWithdrawals < withdrawLimit)
+        if ((balance - amount) <= 0 && numWithdrawals < withdrawLimit)
         {
             calcOverdraft(amount - balance);
             transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
             numWithdrawals++;
             return true;
         }
-        elif((balance - amount) >= 0 && numWithdrawals < withdrawLimit)
+        elif((balance - amount) > 0 && numWithdrawals < withdrawLimit)
         {
             balance -= amount;
             transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);

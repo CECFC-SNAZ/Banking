@@ -25,11 +25,15 @@ void Account::useSaved()
 {
 	if (checkFile("userAccounts.dat"))
 	{
+		int* totalAccounts_ptr = nullptr;
+		int* TotalAccountIDs_ptr = nullptr;
+		totalAccounts_ptr = &totalAccounts;
+		TotalAccountIDs_ptr = &totalAccountIDs;
 		fstream inputFile;
 		inputFile.open("userAccounts.dat", ios::in | ios::binary);
 		inputFile.read(reinterpret_cast<char*>(availableAccounts), sizeof(availableAccounts));
-		inputFile.read(reinterpret_cast<char*>(totalAccounts), sizeof(totalAccounts));
-		inputFile.read(reinterpret_cast<char*>(totalAccountIDs), sizeof(totalAccountIDs));
+		inputFile.read(reinterpret_cast<char*>(totalAccounts_ptr), sizeof(totalAccounts));
+		inputFile.read(reinterpret_cast<char*>(TotalAccountIDs_ptr), sizeof(totalAccountIDs));
 		inputFile.close();
 	}
 }
@@ -63,7 +67,7 @@ void Account::createAccount()
 				cout << "This username already exists.";
 			}
 		}
-		userAccount.aname = tempUsername;
+		userAccount.ausername = tempUsername;
 		cout << "\n\nEnter a new password: ";
 		cin >> userAccount.apassword;
 		userAccount.aaccountNumber = totalAccounts + 1;
@@ -201,7 +205,7 @@ void Account::storeAccountInfo()
 	strcpy_s(storeAccount.spassword, 40 , userAccount.apassword.c_str());
 	storeAccount.saccountNuber = userAccount.aaccountNumber;
 	storeAccount.balance = userAccount.balance;
-	for (int i = 0; i < userAccount.aaccountIDs.size() || i <= 10; i++)
+	for (int i = 0; i < userAccount.aaccountIDs.size() && i <= 10; i++)
 	{
 		storeAccount.saccountIDs[i] = userAccount.aaccountIDs[i];
 	}
@@ -229,6 +233,10 @@ bool Account::checkFile(string fileName)
 
 void Account::saveAccounts()
 {
+	int* totalAccounts_ptr = nullptr;
+	int* TotalAccountIDs_ptr = nullptr;
+	totalAccounts_ptr = &totalAccounts;
+	TotalAccountIDs_ptr = &totalAccountIDs;
 	accountStorage saveAccounts[10];
 	for (int i = 0; i < accountsForStorage.size(); i++)
 	{
@@ -237,8 +245,9 @@ void Account::saveAccounts()
 	fstream storefile;
 	storefile.open("UserAccounts.dat", ios::out | ios::binary);
 	storefile.write(reinterpret_cast<char*>(saveAccounts), sizeof(saveAccounts));
-	storefile.write(reinterpret_cast<char*>(totalAccounts), sizeof(totalAccounts));
-	storefile.write(reinterpret_cast<char*>(totalAccountIDs), sizeof(totalAccountIDs));
+	//use pointer
+	storefile.write(reinterpret_cast<char*>(totalAccounts_ptr), sizeof(totalAccounts));
+	storefile.write(reinterpret_cast<char*>(TotalAccountIDs_ptr), sizeof(totalAccountIDs));
 	storefile.close();
 }
 
