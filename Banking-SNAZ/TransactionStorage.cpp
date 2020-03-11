@@ -99,6 +99,8 @@ void TransactionStorage::withdrawal(timeStruct timeIn, double amount, int ID, do
 	Transaction newTransaction(Transaction::Type::Withdrawal, timeIn, amount, ID, pBal, nBal);
 	newTransaction.storeInFile(transactionFile);
 	transactionFile.close();
+	allTransactions.push_back(newTransaction);
+	if (ID == accountNumber) thisAccountTransactions.push_back(newTransaction);
 }
 
 void TransactionStorage::deposit(timeStruct timeIn, double amount, int ID, double pBal, double nBal)
@@ -107,4 +109,6 @@ void TransactionStorage::deposit(timeStruct timeIn, double amount, int ID, doubl
 	Transaction newTransaction(Transaction::Type::Deposit, timeIn, amount, ID, pBal, nBal);
 	newTransaction.storeInFile(transactionFile);
 	transactionFile.close();
+	allTransactions.push_back(newTransaction);
+	if (ID == accountNumber) thisAccountTransactions.push_back(newTransaction);
 }
