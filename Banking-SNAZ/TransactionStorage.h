@@ -21,9 +21,11 @@ private:
 	struct stat results;
 	int accountNumber;
 public:
-	//Open a file for use
-	TransactionStorage();
-	~TransactionStorage();
+	//Set the account number for the class
+	void setAccountNumber(int number)
+	{
+		accountNumber = number;
+	}
 	//Check for a file's existence
 	bool checkFile(string fileName);
 	//Set the active account

@@ -284,11 +284,14 @@ int Account::accessAccounts()
 		}
 		if (choice == index + 2)
 		{
+			storeAccountInfo();
+			saveAccounts();
 			return 0;
 		}
 		switch (userAccount.aaccountIDs[choice - 1].type)
 		{
 		case CHECKING:
+			cout << "checking account #";
 			break;
 		case SAVINGS:
 			cout << "Savings Account #";
@@ -305,7 +308,9 @@ int Account::accessAccounts()
 		}
 		if (userAccount.aaccountIDs[choice - 1].type == CHECKING)
 		{
+			cls();
 			CheckingAccount checking(userAccount.balance, userAccount.aaccountIDs[choice].IDnumber);
+			checking.menu();
 		}
 		elif(userAccount.aaccountIDs[choice - 1].type == SAVINGS)
 		{
@@ -322,6 +327,4 @@ int Account::accessAccounts()
 			//CD
 		}
 	}
-	storeAccountInfo();
-	saveAccounts();
 }

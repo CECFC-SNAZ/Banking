@@ -12,11 +12,11 @@ using namespace std;
 const bool debug = false;
 
 timeStruct _getTime(){
-	time_t t = time(0);
-#define _CRT_SECURE_NO_WARNINGS
-	tm* now = localtime(&t);
-#undef _CRT_SECURE_NO_WARNINGS
-	return { now->tm_year + 1900, now->tm_mon + 1, now->tm_mday, now->tm_hour, now->tm_min, now->tm_sec };
+	time_t time_ptr;
+	time_ptr = time(NULL);
+	tm now;
+	localtime_s(&now, &time_ptr);
+	return { now.tm_year + 1900, now.tm_mon + 1, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec };
 }
 
 Transaction::Transaction() {
