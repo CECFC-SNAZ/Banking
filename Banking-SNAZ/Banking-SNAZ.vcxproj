@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Account.h" />
     <ClInclude Include="BaseClass.h" />
+    <ClInclude Include="Cd.h" />
     <ClInclude Include="Checking.h" />
     <ClInclude Include="Cls.h" />
     <ClInclude Include="Heloc.h" />
@@ -149,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="BaseClass.cpp" />
+    <ClCompile Include="Cd.cpp" />
     <ClCompile Include="Checking.cpp" />
     <ClCompile Include="Cls.cpp" />
     <ClCompile Include="Heloc.cpp" />

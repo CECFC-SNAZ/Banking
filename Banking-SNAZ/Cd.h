@@ -7,7 +7,6 @@
 #ifndef CD_H
 #define CD_H
 
-#include "Transaction.h"
 #include "BaseClass.h"
 using namespace std;
 

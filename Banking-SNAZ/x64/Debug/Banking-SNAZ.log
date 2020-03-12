@@ -1,2 +1,16 @@
-﻿  Transaction.cpp
+﻿  Account.cpp
+C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\BaseClass.h(49,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  BaseClass.cpp
+C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\BaseClass.h(49,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Cd.cpp
+C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\BaseClass.h(49,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Checking.cpp
+C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\BaseClass.h(49,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Heloc.cpp
+C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\BaseClass.h(49,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Heloc.cpp(15,23): warning C4305: '=': truncation from 'double' to 'float'
+  Source.cpp
+C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\BaseClass.h(49,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+C:\Users\NicholasPie\source\repos\CECFC-SNAZ\Banking\Banking-SNAZ\Account.cpp(339): warning C4715: 'Account::accessAccounts': not all control paths return a value
   Banking-SNAZ.vcxproj -> C:\Users\NicholasPie\Source\Repos\CECFC-SNAZ\Banking\x64\Debug\Banking-SNAZ.exe

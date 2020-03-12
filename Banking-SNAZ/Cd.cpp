@@ -11,7 +11,7 @@ CD::CD(double bal, int accountNumberi) : Base(bal, accountNumberi)
 	withdrawLimit = 0;
 
 	timeStruct tmpTimeStruct;
-	tmpTimeStruct = _getTime();
+	tmpTimeStruct = getTime();
 	entryTime.tm_year = tmpTimeStruct.year;
 	entryTime.tm_mon = tmpTimeStruct.month;
 	entryTime.tm_mday = tmpTimeStruct.day;
@@ -29,7 +29,7 @@ bool CD::setMonthsUntilWithdrawal(int inp) {
 
 bool CD::isEarly() {
 	timeStruct nowTime, endTime;
-	nowTime = _getTime();
+	nowTime = getTime();
 	endTime = getTimeStruct();
 	endTime.month += monthsUntilWithdrawal;
 	while (endTime.month > 12) {

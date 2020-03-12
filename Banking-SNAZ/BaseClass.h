@@ -28,7 +28,7 @@ public:
     Base(double bal, int accountNumberi);
     ~Base() {}
     //Withdraw funds. Returns true if withdrawal was accepted, or false if the withdrawal was denied.
-    bool withdrawal(double amount);
+    virtual bool withdrawal(double amount);
     //Deposit funds
     void deposit(double amount);
     //Returns the current account balance
