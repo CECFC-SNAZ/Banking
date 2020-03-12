@@ -79,7 +79,10 @@ void Base::calcCheck(double)
 
 void Base::calcOverdraft(double overdraft)
 {
+    double pBal = balance;
+    timeStruct storeTime = getTime();
     balance -= (overdraft + overdraftfee + (overdraft * overdraftInterest));
+    transactionStorage.fee(storeTime, (overdraft + overdraftfee + (overdraft * overdraftInterest)), accountNumber, pBal, balance);
 }
 
 void Base::calcLate(double)

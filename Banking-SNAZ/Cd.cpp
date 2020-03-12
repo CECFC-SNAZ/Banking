@@ -77,6 +77,10 @@ timeStruct CD::getTimeStruct() {
 bool CD::withdrawal(double amount) {
 	bool boolStore;
 	boolStore = Base::withdrawal(amount);
-	if (boolStore && isEarly()) balance -= earlywithdrawfee;
+	if (boolStore && isEarly()) {
+		double pBal = balance;
+		balance -= earlywithdrawfee;
+		transactionStorage.fee(getTime(), earlywithdrawfee, accountNumber, pBal, balance);
+	}
 	return boolStore;
 }

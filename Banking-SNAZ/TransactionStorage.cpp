@@ -81,6 +81,9 @@ void TransactionStorage::displayAccountTransactions()
 		case Transaction::Type::Withdrawal:
 			cout << "Withdrawal";
 			break;
+		case Transaction::Type::Fee:
+			cout << "Fee";
+			break;
 		default:
 			cout << "*Transaction type error*";
 		}

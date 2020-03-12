@@ -22,6 +22,7 @@ protected:
     double balance;
     double depositfees, checkfees, overdraftfee, overdraftInterest, latefee, earlywithdrawfee, totalfees, monthlyFee, maxWithdrawAmount;
     entrystruct entryTime;
+    int monthsUntilWithdrawal = 0;
 public:
     Base() { depositfees = 0, checkfees = 0, overdraftfee = 0, latefee = 0, earlywithdrawfee = 0, totalfees = 0; }
     Base(double bal, int accountNumberi);

@@ -12,8 +12,6 @@
 using namespace std;
 
 class CD : public Base {
-protected:
-	int monthsUntilWithdrawal;
 public:
 	CD(double bal, int accountNumberi);
 	void displayType() { cout << "CD"; }
