@@ -98,29 +98,26 @@ void TransactionStorage::displayAccountTransactions()
 
 void TransactionStorage::withdrawal(timeStruct timeIn, double amount, int ID, double pBal, double nBal)
 {
-	transactionFile.open("transactions.dat", ios::out | ios::binary);
 	Transaction newTransaction(Transaction::Type::Withdrawal, timeIn, amount, ID, pBal, nBal);
-	newTransaction.storeInFile(transactionFile);
-	transactionFile.close();
-	allTransactions.push_back(newTransaction);
-	if (ID == accountNumber) thisAccountTransactions.push_back(newTransaction);
+	storeTrans(newTransaction);
 }
 
 void TransactionStorage::deposit(timeStruct timeIn, double amount, int ID, double pBal, double nBal)
 {
-	transactionFile.open("transactions.dat", ios::out | ios::binary);
 	Transaction newTransaction(Transaction::Type::Deposit, timeIn, amount, ID, pBal, nBal);
-	newTransaction.storeInFile(transactionFile);
-	transactionFile.close();
-	allTransactions.push_back(newTransaction);
-	if (ID == accountNumber) thisAccountTransactions.push_back(newTransaction);
+	storeTrans(newTransaction);
 }
 
 void TransactionStorage::fee(timeStruct timeIn, double amount, int ID, double pBal, double nBal) {
-	transactionFile.open("transactions.dat", ios::out | ios::binary);
 	Transaction newTransaction(Transaction::Type::Fee, timeIn, amount, ID, pBal, nBal);
-	newTransaction.storeInFile(transactionFile);
+	storeTrans(newTransaction);
+}
+
+void TransactionStorage::storeTrans(Transaction transIn) {
+	transactionFile.open("transactions.dat", ios::out | ios::binary);
+	transactionFile.seekp(ios_base::end);
+	transIn.storeInFile(transactionFile);
 	transactionFile.close();
-	allTransactions.push_back(newTransaction);
-	if (ID == accountNumber) thisAccountTransactions.push_back(newTransaction);
+	allTransactions.push_back(transIn);
+	if (accountNumber == transIn.getAcctID()) thisAccountTransactions.push_back(transIn);
 }

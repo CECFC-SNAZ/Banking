@@ -42,4 +42,6 @@ public:
 	void deposit(timeStruct timeIn, double amount, int ID, double pBal, double nBal);
 	//Store a fee
 	void fee(timeStruct timeIn, double amount, int ID, double pBal, double nBal);
+private:
+	void storeTrans(Transaction transIn);
 };
