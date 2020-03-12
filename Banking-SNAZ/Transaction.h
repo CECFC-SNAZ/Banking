@@ -19,7 +19,7 @@ timeStruct _getTime();
 
 class Transaction {
 public:
-	enum class Type { Deposit, Withdrawal };
+	enum class Type { Deposit, Withdrawal, Fee };
 private:
 	Type transType;
 	timeStruct transTime;

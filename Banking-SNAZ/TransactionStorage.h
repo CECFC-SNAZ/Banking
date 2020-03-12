@@ -40,4 +40,6 @@ public:
 	void withdrawal(timeStruct timeIn, double amount, int ID, double pBal, double nBal);
 	//Store a deposit
 	void deposit(timeStruct timeIn, double amount, int ID, double pBal, double nBal);
+	//Store a fee
+	void fee(timeStruct timeIn, double amount, int ID, double pBal, double nBal);
 };
