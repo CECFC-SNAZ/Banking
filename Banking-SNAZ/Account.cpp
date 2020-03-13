@@ -117,7 +117,11 @@ void Account::createAccount()
 				invalid = true;
 			}
 		}
-		userAccount.balance = 0;
+		for (int i = 0; i < 10; i++)
+		{
+			userAccount.balance[i] = 0;
+			userAccount.amountOwed[i] = 0;
+		}
 	}
 	cls();
 }
@@ -144,12 +148,16 @@ bool Account::signIn()
 				userAccount.ausername = availableAccounts[index].suserName;
 				userAccount.apassword = availableAccounts[index].spassword;
 				userAccount.aaccountNumber = availableAccounts[index].saccountNuber;
-				userAccount.balance = availableAccounts[index].balance;
 				userAccount.aaccountIDs.clear();
 				for (int i = 0; i < 10; i++)
 				{
 					//Add check for ID existance
-					userAccount.aaccountIDs.push_back(availableAccounts[index].saccountIDs[i]);
+					if (availableAccounts[index].saccountIDs[i].IDnumber > 0)
+					{
+						userAccount.aaccountIDs.push_back(availableAccounts[index].saccountIDs[i]);
+						userAccount.balance[i] = availableAccounts[index].balance[i];
+						userAccount.amountOwed[i] = availableAccounts[index].amountOwed[i];
+					}
 				}
 				exists = true;
 			}
@@ -204,10 +212,11 @@ void Account::storeAccountInfo()
 	strcpy_s(storeAccount.suserName, 40 , userAccount.ausername.c_str());
 	strcpy_s(storeAccount.spassword, 40 , userAccount.apassword.c_str());
 	storeAccount.saccountNuber = userAccount.aaccountNumber;
-	storeAccount.balance = userAccount.balance;
 	for (int i = 0; i < userAccount.aaccountIDs.size() && i <= 10; i++)
 	{
 		storeAccount.saccountIDs[i] = userAccount.aaccountIDs[i];
+		storeAccount.balance[i] = userAccount.balance[i];
+		storeAccount.amountOwed[i] = userAccount.amountOwed[i];
 	}
 	storeAccount.filled = true;
 	accountsForStorage.push_back(storeAccount);
@@ -240,6 +249,7 @@ void Account::saveAccounts()
 	accountStorage saveAccounts[10];
 	for (int i = 0; i < accountsForStorage.size(); i++)
 	{
+		//Write at the index of the account number
 		saveAccounts[accountsForStorage[i].saccountNuber - 1] = accountsForStorage[i];
 	}
 	fstream storefile;
@@ -318,7 +328,7 @@ int Account::accessAccounts()
 		if (userAccount.aaccountIDs[choice - 1].type == CHECKING)
 		{
 			cls();
-			CheckingAccount checking(userAccount.balance, userAccount.aaccountIDs[choice].IDnumber);
+			CheckingAccount checking(userAccount.balance[choice - 1], userAccount.aaccountIDs[choice - 1].IDnumber);
 			checking.menu();
 		}
 		elif(userAccount.aaccountIDs[choice - 1].type == SAVINGS)
@@ -328,8 +338,10 @@ int Account::accessAccounts()
 		elif(userAccount.aaccountIDs[choice - 1].type == HELOC)
 		{
 			cls();
-			Heloc heloc(userAccount.balance, userAccount.aaccountIDs[choice - 1].IDnumber);
+			Heloc heloc(userAccount.balance[choice - 1], userAccount.amountOwed[choice - 1], userAccount.aaccountIDs[choice - 1].IDnumber);
 			heloc.menu();
+			userAccount.balance[choice - 1] = heloc.get_balance();
+			userAccount.amountOwed[choice - 1] = heloc.getmmountOwed();
 		}
 		elif(userAccount.aaccountIDs[choice - 1].type == CD)
 		{

@@ -40,7 +40,7 @@ void TransactionStorage::readAll()
 	Transaction tempTrans;
 	Transaction* transptr = nullptr;
 	transptr = &tempTrans;
-	if (stat("transactions.dat", &results))
+	if (stat("transactions.dat", &results) == 0)
 	{
 		for (int i = 0; i < results.st_size; i += sizeof(tempTrans))
 		{

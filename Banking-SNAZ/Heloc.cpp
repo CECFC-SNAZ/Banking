@@ -10,13 +10,18 @@ using namespace std;
 
 #define elif else if
 
-Heloc::Heloc(double bal, int accountNumberIn) : Base(bal, accountNumberIn)
+Heloc::Heloc(double bal, double amountOwe, int accountNumberIn) : Base(bal, accountNumberIn)
 {
     interestRate = 0.1;
     amountOwed = 0;
-    balance = 5000;
     maxWithdrawAmount = 500;
+    amountOwed = amountOwe;
     transactionStorage.setAccountNumber(accountNumberIn);
+    if (balance <= 0)
+    {
+        balance = 50000;
+        amountOwed = 0;
+    }
 }
 
 bool Heloc::withdrawal(double amount)
