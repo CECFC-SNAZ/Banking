@@ -1,7 +1,0 @@
-﻿  Account.cpp
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\BaseClass.h(48,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Account.cpp(208,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Account.cpp(241,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Account.cpp(262,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Banking-SNAZ\Account.cpp(339): warning C4715: 'Account::accessAccounts': not all control paths return a value
-  Banking-SNAZ.vcxproj -> C:\Users\zhpar\Documents\Programming_Projects\2020\Banking-SNAZ\Debug\Banking-SNAZ.exe
