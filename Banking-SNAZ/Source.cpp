@@ -18,6 +18,9 @@ int main() {
 		Transaction tmpTrans;
 		if (not tmpTrans.test()) cout << "Error with transaction file I/O\n";
 	}
+	Transaction transaction;
+
+	cout << "\n\n\n" << sizeof(transaction) << "\n\n\n";
 
 
 	bool valid = true, exit = false;

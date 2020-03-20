@@ -119,7 +119,7 @@ timeStruct Base::getTime()
     time_ptr = time(NULL);
     tm tm_local;
     localtime_s(&tm_local, &time_ptr);
-    timeStore.year = tm_local.tm_year;
+    timeStore.year = tm_local.tm_year + 1900;
     timeStore.month = tm_local.tm_mon;
     timeStore.day = tm_local.tm_mday;
     timeStore.hour = tm_local.tm_hour;

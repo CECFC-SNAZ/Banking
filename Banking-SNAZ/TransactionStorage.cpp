@@ -89,7 +89,7 @@ void TransactionStorage::displayAccountTransactions()
 		}
 		cout << "\nTransaction ammount: " << thisAccountTransactions[i].getAmount()
 			<< "\nPrevious balance: " << thisAccountTransactions[i].getPrevBalance()
-			<< "\nNew account balance: " << thisAccountTransactions[i].getPrevBalance() << "\n\n";
+			<< "\nNew account balance: " << thisAccountTransactions[i].getNewBalance() << "\n\n";
 	}
 	cout << "\n\n\nPress \"Enter\" to exit: ";
 	cin.ignore();
@@ -114,8 +114,8 @@ void TransactionStorage::fee(timeStruct timeIn, double amount, int ID, double pB
 }
 
 void TransactionStorage::storeTrans(Transaction transIn) {
-	transactionFile.open("transactions.dat", ios::out | ios::binary);
-	transactionFile.seekp(ios_base::end);
+	transactionFile.open("transactions.dat", ios::out | ios::binary | ios::app);
+	//transactionFile.seekp(ios_base::end + 1);
 	transIn.storeInFile(transactionFile);
 	transactionFile.close();
 	allTransactions.push_back(transIn);
