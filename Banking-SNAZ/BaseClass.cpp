@@ -25,14 +25,14 @@ bool Base::withdrawal(double amount)
     timeStruct storeTime = getTime();
     if (withdrawLimit > 0)
     {
-        if ((balance - amount) <= 0 && numWithdrawals < withdrawLimit)
+        if ((balance - amount) < 0 && numWithdrawals < withdrawLimit)
         {
             calcOverdraft(amount - balance);
             transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
             numWithdrawals++;
             return true;
         }
-        elif((balance - amount) > 0 && numWithdrawals < withdrawLimit)
+        elif((balance - amount) >= 0 && numWithdrawals < withdrawLimit)
         {
             balance -= amount;
             transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
@@ -120,7 +120,7 @@ timeStruct Base::getTime()
     tm tm_local;
     localtime_s(&tm_local, &time_ptr);
     timeStore.year = tm_local.tm_year + 1900;
-    timeStore.month = tm_local.tm_mon;
+    timeStore.month = tm_local.tm_mon + 1;
     timeStore.day = tm_local.tm_mday;
     timeStore.hour = tm_local.tm_hour;
     timeStore.minute = tm_local.tm_min;
@@ -142,7 +142,7 @@ void Base::menu()
     double amount;
     bool valid = true, exit = false;
     displayType();
-    cout << "\nCurrent balance: " << balance;
+    cout << " account #" << accountNumber;
     while (!exit)
     {
         do
@@ -151,8 +151,8 @@ void Base::menu()
             {
                 cout << "Invalid selection.\n\n";
             }
-            cout << " account\n#" << accountNumber << "1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
-                <<"\n4 - Exit to main menu\nChoice:";
+            cout << "\nCurrent balance: " << balance << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
+                <<"\n4 - Exit to main menu\nChoice: ";
             cin >> choice;
             switch (choice)
             {

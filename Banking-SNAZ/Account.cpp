@@ -41,6 +41,7 @@ void Account::useSaved()
 void Account::createAccount()
 {
 	cls();
+	userAccount.aaccountIDs.clear();
 	string ch;
 	if (totalAccounts > 10)
 	{
@@ -85,31 +86,32 @@ void Account::createAccount()
 			{
 			case 1:
 				tempID.type = CHECKING;
-				tempID.IDnumber = totalAccounts + 1;
-				totalAccounts += 1;
+				tempID.IDnumber = totalAccountIDs + 1;
+				totalAccountIDs += 1;
 				userAccount.aaccountIDs.push_back(tempID);
 				invalid = false;
 				break;
 			case 2:
 				tempID.type = SAVINGS;
-				tempID.IDnumber = totalAccounts + 1;
-				totalAccounts += 1;
+				tempID.IDnumber = totalAccountIDs + 1;
+				totalAccountIDs += 1;
 				userAccount.aaccountIDs.push_back(tempID);
 				invalid = false;
 				break;
 			case 3:
 				tempID.type = HELOC;
-				tempID.IDnumber = totalAccounts + 1;
-				totalAccounts += 1;
+				tempID.IDnumber = totalAccountIDs + 1;
+				totalAccountIDs += 1;
 				userAccount.aaccountIDs.push_back(tempID);
 				invalid = false;
 				break;
 			case 4:
 				tempID.type = CD;
-				tempID.IDnumber = totalAccounts + 1;
-				totalAccounts += 1;
+				tempID.IDnumber = totalAccountIDs + 1;
+				totalAccountIDs += 1;
 				userAccount.aaccountIDs.push_back(tempID);
 				invalid = false;
+				break;
 			case 5:
 				exit = true;
 				break;

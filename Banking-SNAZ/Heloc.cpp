@@ -67,9 +67,9 @@ void Heloc::menu()
                 cout << "Invalid selection.\n\n";
             }
             displayType();
-            cout << " account #" << accountNumber << "\nCurrent balance: " << balance << "\nAmount owed:" << amountOwed << "\n";
+            cout << " account #" << accountNumber << "\nCurrent balance: " << balance << "\nAmount owed: " << amountOwed << "\n";
             cout << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
-                << "\n4 - Exit to main menu\nChoice:";
+                << "\n4 - Exit to main menu\nChoice: ";
             cin >> choice;
             switch (choice)
             {

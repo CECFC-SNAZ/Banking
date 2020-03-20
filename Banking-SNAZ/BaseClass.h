@@ -64,7 +64,7 @@ public:
    //Main menu for accessing the account's features
    void menu();
    //cout the type of account that is currently active (must be defined for each account)
-   void displayType()
+   virtual void displayType()
    {
        cout << "Error, type not found.";
    }
