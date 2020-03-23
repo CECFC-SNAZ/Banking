@@ -171,18 +171,21 @@ void Base::menu()
             switch (choice)
             {
             case 1:
+                cls();
                 cout << "Enter the amount you want to withdraw: ";
                 cin >> amount;
                 withdrawal(amount);
                 valid = true;
                 break;
             case 2:
+                cls();
                 cout << "Enter the amount you want to deposit: ";
                 cin >> amount;
                 deposit(amount);
                 valid = true;
                 break;
             case 3:
+                cls();
                 displayTransactions();
                 valid = true;
                 break;
@@ -193,6 +196,7 @@ void Base::menu()
             default:
                 valid = false;
             }
+            cls();
         } while (!valid);
     }
 }

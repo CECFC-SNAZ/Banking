@@ -7,6 +7,7 @@ Struct stores time of entry.  Base Class includes fees, interest rate, and a wit
 
 #include "Transaction.h"
 #include "TransactionStorage.h"
+#include "Cls.h"
 #include <iostream>
 #include <ctime>
 using namespace std;

@@ -74,18 +74,21 @@ void Heloc::menu()
             switch (choice)
             {
             case 1:
+                cls();
                 cout << "Enter the amount you want to withdraw: ";
                 cin >> amount;
                 withdrawal(amount);
                 valid = true;
                 break;
             case 2:
+                cls();
                 cout << "Enter the amount you want to pay: ";
                 cin >> amount;
                 deposit(amount);
                 valid = true;
                 break;
             case 3:
+                cls();
                 displayTransactions();
                 valid = true;
                 break;
@@ -96,6 +99,7 @@ void Heloc::menu()
             default:
                 valid = false;
             }
+            cls();
         } while (!valid);
     }
 }

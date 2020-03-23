@@ -75,6 +75,7 @@ void Account::createAccount()
 		totalAccounts += 1;
 		while (!exit)
 		{
+			cls();
 			if (invalid)
 			{
 				cout << "\n\nInvalid selection.\n\n";
@@ -336,7 +337,10 @@ int Account::accessAccounts()
 		}
 		elif(userAccount.aaccountIDs[choice - 1].type == SAVINGS)
 		{
-			//Savings
+			cls();
+			Saving saving(userAccount.balance[choice - 1], userAccount.aaccountIDs[choice - 1].IDnumber);
+			saving.menu();
+			userAccount.balance[choice - 1] = saving.get_balance();
 		}
 		elif(userAccount.aaccountIDs[choice - 1].type == HELOC)
 		{

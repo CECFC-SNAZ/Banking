@@ -48,7 +48,9 @@ public:
 	timeStruct getFirstTime()
 	{
 		if (!thisAccountTransactions.empty())
-		return thisAccountTransactions[0].getTime();
+		{
+			return thisAccountTransactions[0].getTime();
+		}
 	}
 	//Returns the number of withdrawals made in an account
 	int numberOfWithdrawals();

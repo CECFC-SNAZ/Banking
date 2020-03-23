@@ -118,6 +118,7 @@ void CD::menu()
 			switch (choice)
 			{
 			case 1:
+				cls();
 				if (!depositWithdrawal)
 				{
 					cout << "Enter the amount you want to withdraw: ";
@@ -132,6 +133,7 @@ void CD::menu()
 				}
 				break;
 			case 2:
+				cls();
 				if (depositWithdrawal)
 				{
 					cout << "Enter the amount you want to deposit: ";
@@ -148,6 +150,7 @@ void CD::menu()
 				}
 				break;
 			case 3:
+				cls();
 				displayTransactions();
 				valid = true;
 				break;
@@ -158,6 +161,7 @@ void CD::menu()
 			default:
 				valid = false;
 			}
+			cls();
 		} while (!valid);
 	}
 }
