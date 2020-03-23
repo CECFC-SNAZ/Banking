@@ -144,7 +144,9 @@ timeStruct Base::getTime()
 void Base::displayTransactions()
 {
     string ch;
+    //This works fine
     transactionStorage.readAll();
+    //The account number is what it should be here, but step into the function and it changes.
     transactionStorage.findAccountTransactions();
     transactionStorage.displayAccountTransactions();
 }
@@ -186,6 +188,7 @@ void Base::menu()
                 break;
             case 3:
                 cls();
+                //This is here the account number problem starts... Step into this function
                 displayTransactions();
                 valid = true;
                 break;

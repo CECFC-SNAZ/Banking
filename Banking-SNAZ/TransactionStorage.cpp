@@ -54,6 +54,7 @@ void TransactionStorage::readAll()
 void TransactionStorage::findAccountTransactions()
 {
 	thisAccountTransactions.clear();
+	//At this point things don't work because the new account number doesn't match the one in the transactions
 	for (int i = 0; i < allTransactions.size(); i++)
 	{
 		if (allTransactions[i].getAcctID() == accountNumber)
