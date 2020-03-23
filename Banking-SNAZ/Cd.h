@@ -8,9 +8,13 @@
 #define CD_H
 
 #include "BaseClass.h"
+#include <iostream>
 using namespace std;
 
 class CD : public Base {
+private:
+	timeStruct matureTime;
+	bool depositWithdrawal;
 public:
 	CD(double bal, int accountNumberi);
 	void displayType() { cout << "CD"; }
@@ -20,6 +24,7 @@ public:
 	bool withdrawal(double amount) override; // Calls withdraw from the base class, but with a check for early withdrawal
 
 	int getMonthsUntilWithdrawal() { return monthsUntilWithdrawal; }
+	void menu();
 };
 
 #endif CD_H

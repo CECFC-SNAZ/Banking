@@ -84,6 +84,9 @@ void TransactionStorage::displayAccountTransactions()
 		case Transaction::Type::Fee:
 			cout << "Fee";
 			break;
+		case Transaction::Type::Payment:
+			cout << "Payment";
+			break;
 		default:
 			cout << "*Transaction type error*";
 		}
@@ -111,6 +114,25 @@ void TransactionStorage::deposit(timeStruct timeIn, double amount, int ID, doubl
 void TransactionStorage::fee(timeStruct timeIn, double amount, int ID, double pBal, double nBal) {
 	Transaction newTransaction(Transaction::Type::Fee, timeIn, amount, ID, pBal, nBal);
 	storeTrans(newTransaction);
+}
+
+void TransactionStorage::payment(timeStruct timeIn, double amount, int ID, double pBal, double nBal)
+{
+	Transaction newTransaction(Transaction::Type::Payment, timeIn, amount, ID, pBal, nBal);
+	storeTrans(newTransaction);
+}
+
+int TransactionStorage::numberOfWithdrawals()
+{
+	int count = 0;
+	for (int i = 0; i < thisAccountTransactions.size(); i++)
+	{
+		if (thisAccountTransactions[i].getType() == Transaction::Type::Withdrawal)
+		{
+			count++;
+		}
+	}
+	return count;
 }
 
 void TransactionStorage::storeTrans(Transaction transIn) {

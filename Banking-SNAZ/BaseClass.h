@@ -21,7 +21,7 @@ protected:
     float annualInterestRate;
     double balance;
     double depositfees, checkfees, overdraftfee, overdraftInterest, latefee, earlywithdrawfee, totalfees, monthlyFee, maxWithdrawAmount;
-    entrystruct entryTime;
+    timeStruct entryTime;
     int monthsUntilWithdrawal = 0;
 public:
     Base() { depositfees = 0, checkfees = 0, overdraftfee = 0, latefee = 0, earlywithdrawfee = 0, totalfees = 0; }
@@ -49,8 +49,8 @@ public:
         annualInterestRate = rate;
     }
     void displayFee();
-    void setEntryTime(entrystruct enteredtime) { entryTime = enteredtime; }
-   entrystruct getEntryTime() { return entryTime; }
+    void setEntryTime(timeStruct enteredtime) { entryTime = enteredtime; }
+   timeStruct getEntryTime() { return entryTime; }
 
 
    //Set the initial overdraft fee and overdraft interest rate (interest rate is ideally 10% - 20%)

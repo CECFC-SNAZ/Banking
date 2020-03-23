@@ -50,7 +50,7 @@ void Heloc::deposit(double amount)
     double pBal = amountOwed;
     timeStruct storeTime = getTime();
     amountOwed -= amount;
-    transactionStorage.deposit(storeTime, amount, accountNumber, pBal, amountOwed);
+    transactionStorage.payment(storeTime, amount, accountNumber, pBal, amountOwed);
 }
 
 void Heloc::menu()
@@ -68,7 +68,7 @@ void Heloc::menu()
             }
             displayType();
             cout << " account #" << accountNumber << "\nCurrent balance: " << balance << "\nAmount owed: " << amountOwed << "\n";
-            cout << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
+            cout << "\n1 - Withdraw funds\n2 - Make payment\n3 - Veiw past transactions"
                 << "\n4 - Exit to main menu\nChoice: ";
             cin >> choice;
             switch (choice)
@@ -80,7 +80,7 @@ void Heloc::menu()
                 valid = true;
                 break;
             case 2:
-                cout << "Enter the amount you want to deposit: ";
+                cout << "Enter the amount you want to pay: ";
                 cin >> amount;
                 deposit(amount);
                 valid = true;

@@ -6,17 +6,23 @@
 #include "Cd.h"
 using namespace std;
 
+#define elif else if
+
 CD::CD(double bal, int accountNumberi) : Base(bal, accountNumberi)
 {
 	withdrawLimit = 0;
-
-	timeStruct tmpTimeStruct;
-	tmpTimeStruct = getTime();
-	entryTime.tm_year = tmpTimeStruct.year;
-	entryTime.tm_mon = tmpTimeStruct.month;
-	entryTime.tm_mday = tmpTimeStruct.day;
-	entryTime.tm_hour = tmpTimeStruct.hour;
-	entryTime.tm_min = tmpTimeStruct.minute;
+	if (bal <= 0)
+	{
+		bal = 0;
+		depositWithdrawal = true;
+	}
+	elif (bal >= 1)
+	{
+		depositWithdrawal = false;
+		transactionStorage.readAll();
+		transactionStorage.findAccountTransactions();
+		entryTime = transactionStorage.getFirstTime();
+	}
 }
 
 bool CD::setMonthsUntilWithdrawal(int inp) {
@@ -65,11 +71,11 @@ bool CD::isEarly() {
 
 timeStruct CD::getTimeStruct() {
 	timeStruct tmpTimeStruct;
-	tmpTimeStruct.year = entryTime.tm_year;
-	tmpTimeStruct.month = entryTime.tm_mon;
-	tmpTimeStruct.day = entryTime.tm_mday;
-	tmpTimeStruct.hour = entryTime.tm_hour;
-	tmpTimeStruct.minute = entryTime.tm_min;
+	tmpTimeStruct.year = entryTime.year;
+	tmpTimeStruct.month = entryTime.month;
+	tmpTimeStruct.day = entryTime.day;
+	tmpTimeStruct.hour = entryTime.hour;
+	tmpTimeStruct.minute = entryTime.minute;
 	tmpTimeStruct.second = 0;
 	return tmpTimeStruct;
 }
@@ -83,4 +89,75 @@ bool CD::withdrawal(double amount) {
 		transactionStorage.fee(getTime(), earlywithdrawfee, accountNumber, pBal, balance);
 	}
 	return boolStore;
+}
+
+void CD::menu()
+{
+	string ch;
+	int choice;
+	double amount;
+	bool valid = true, exit = false;
+	displayType();
+	cout << " account #" << accountNumber;
+	while (!exit)
+	{
+		do
+		{
+			if (!valid)
+			{
+				cout << "Invalid selection.\n\n";
+			}
+			cout << "\nCurrent balance: " << balance;
+			if (!depositWithdrawal)
+			{
+				cout << "Time until deposit maturity: ";
+			}
+			cout << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
+				<< "\n4 - Exit to main menu\nChoice: ";
+			cin >> choice;
+			switch (choice)
+			{
+			case 1:
+				if (!depositWithdrawal)
+				{
+					cout << "Enter the amount you want to withdraw: ";
+					cin >> amount;
+					withdrawal(amount);
+					valid = true;
+				}
+				else
+				{
+					cout << "\n\nA deposit must be made first.\nPress \"Enter\" to exit: ";
+					getline(cin, ch);
+				}
+				break;
+			case 2:
+				if (depositWithdrawal)
+				{
+					cout << "Enter the amount you want to deposit: ";
+					cin >> amount;
+					deposit(amount);
+					depositWithdrawal = false;
+					valid = true;
+				}
+				else
+				{
+					cout << "\n\nA deposit has already been made.\nPress \"Enter\" to exit: ";
+					cin.ignore();
+					getline(cin, ch);
+				}
+				break;
+			case 3:
+				displayTransactions();
+				valid = true;
+				break;
+			case 4:
+				valid = true;
+				exit = true;
+				break;
+			default:
+				valid = false;
+			}
+		} while (!valid);
+	}
 }

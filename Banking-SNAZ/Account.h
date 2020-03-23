@@ -10,6 +10,7 @@ Prototypes for the Account class
 #include "Cls.h"
 #include "Checking.h"
 #include "Heloc.h"
+#include "Cd.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -24,7 +25,7 @@ private:
 	int totalAccounts, totalAccountIDs;
 	enum accountTypes
 	{
-		CHECKING, SAVINGS, CD, HELOC
+		CHECKING, SAVINGS, Cd, HELOC
 	};
 	struct accountID
 	{

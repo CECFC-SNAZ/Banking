@@ -106,7 +106,7 @@ void Account::createAccount()
 				invalid = false;
 				break;
 			case 4:
-				tempID.type = CD;
+				tempID.type = Cd;
 				tempID.IDnumber = totalAccountIDs + 1;
 				totalAccountIDs += 1;
 				userAccount.aaccountIDs.push_back(tempID);
@@ -282,7 +282,7 @@ int Account::accessAccounts()
 			case SAVINGS:
 				cout << "Savings Account #";
 				break;
-			case CD:
+			case Cd:
 				cout << "CD Account #";
 				break;
 			case HELOC:
@@ -317,7 +317,7 @@ int Account::accessAccounts()
 		case SAVINGS:
 			cout << "Savings Account #";
 			break;
-		case CD:
+		case Cd:
 			cout << "CD Account #";
 			break;
 		case HELOC:
@@ -332,6 +332,7 @@ int Account::accessAccounts()
 			cls();
 			CheckingAccount checking(userAccount.balance[choice - 1], userAccount.aaccountIDs[choice - 1].IDnumber);
 			checking.menu();
+			userAccount.balance[choice - 1] = checking.get_balance();
 		}
 		elif(userAccount.aaccountIDs[choice - 1].type == SAVINGS)
 		{
@@ -345,9 +346,12 @@ int Account::accessAccounts()
 			userAccount.balance[choice - 1] = heloc.get_balance();
 			userAccount.amountOwed[choice - 1] = heloc.getmmountOwed();
 		}
-		elif(userAccount.aaccountIDs[choice - 1].type == CD)
+		elif(userAccount.aaccountIDs[choice - 1].type == Cd)
 		{
-			//CD
+			cls();
+			CD cd(userAccount.balance[choice - 1], userAccount.aaccountIDs[choice - 1].IDnumber);
+			cd.menu();
+			userAccount.balance[choice - 1] = cd.get_balance();
 		}
 	}
 }

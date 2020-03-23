@@ -12,11 +12,24 @@ Base::Base(double bal, int accountNumberi)
 {
     accountNumber = accountNumberi;
     balance = bal;
-    entryTime.tm_min = 0;
-    entryTime.tm_hour = 0;
-    entryTime.tm_mday = 0;
-    entryTime.tm_mon = 0;
-    entryTime.tm_year = 0;
+    entryTime.minute = 0;
+    entryTime.hour = 0;
+    entryTime.day = 0;
+    entryTime.month = 0;
+    entryTime.year = 0;
+    /*if (bal <= 0)
+    {
+        bal = 0;
+    }
+    elif(bal >= 1)
+    {
+        transactionStorage.readAll();
+        transactionStorage.findAccountTransactions();
+        numWithdrawals = transactionStorage.numberOfWithdrawals();
+    }*/
+    transactionStorage.readAll();
+    transactionStorage.findAccountTransactions();
+    numWithdrawals = transactionStorage.numberOfWithdrawals();
 }
 
 bool Base::withdrawal(double amount)
@@ -151,7 +164,8 @@ void Base::menu()
             {
                 cout << "Invalid selection.\n\n";
             }
-            cout << "\nCurrent balance: " << balance << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
+            cout << "\nCurrent balance: " << balance << "\nNumber of withdrawals left: " << 500 - numWithdrawals
+                << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
                 <<"\n4 - Exit to main menu\nChoice: ";
             cin >> choice;
             switch (choice)

@@ -42,6 +42,16 @@ public:
 	void deposit(timeStruct timeIn, double amount, int ID, double pBal, double nBal);
 	//Store a fee
 	void fee(timeStruct timeIn, double amount, int ID, double pBal, double nBal);
+	//Store a payment
+	void payment(timeStruct timeIn, double amount, int ID, double pBal, double nBal);
+	//Return the time of the first transaction made in an account
+	timeStruct getFirstTime()
+	{
+		if (!thisAccountTransactions.empty())
+		return thisAccountTransactions[0].getTime();
+	}
+	//Returns the number of withdrawals made in an account
+	int numberOfWithdrawals();
 private:
 	void storeTrans(Transaction transIn);
 };
