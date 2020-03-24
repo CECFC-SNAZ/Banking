@@ -33,7 +33,7 @@ public:
 	//Read all transactions from the file
 	void readAll();
 	//Find all transactions matching the active account
-	void findAccountTransactions();
+	void findAccountTransactions(int num);
 	//Display all transactions for the active account
 	void displayAccountTransactions();
 	//Store a withdrawal
@@ -47,10 +47,12 @@ public:
 	//Return the time of the first transaction made in an account
 	timeStruct getFirstTime()
 	{
+		timeStruct retval;
 		if (!thisAccountTransactions.empty())
 		{
-			return thisAccountTransactions[0].getTime();
+			retval = thisAccountTransactions[0].getTime();
 		}
+		return retval;
 	}
 	//Returns the number of withdrawals made in an account
 	int numberOfWithdrawals();

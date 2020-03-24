@@ -51,13 +51,12 @@ void TransactionStorage::readAll()
 	transactionFile.close();
 }
 
-void TransactionStorage::findAccountTransactions()
+void TransactionStorage::findAccountTransactions(int num)
 {
 	thisAccountTransactions.clear();
-	//At this point things don't work because the new account number doesn't match the one in the transactions
 	for (int i = 0; i < allTransactions.size(); i++)
 	{
-		if (allTransactions[i].getAcctID() == accountNumber)
+		if (allTransactions[i].getAcctID() == num)
 		{
 			thisAccountTransactions.push_back(allTransactions[i]);
 		}

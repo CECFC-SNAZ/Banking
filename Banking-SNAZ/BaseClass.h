@@ -14,6 +14,8 @@ using namespace std;
 struct entrystruct {
     int tm_min, tm_hour, tm_mday, tm_mon, tm_year;
 };
+
+
 class Base {
 protected:
     TransactionStorage transactionStorage;

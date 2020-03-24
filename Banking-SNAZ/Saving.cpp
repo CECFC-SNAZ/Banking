@@ -21,9 +21,9 @@ Saving::Saving(double bal, int accountNumberIn) : Base(bal, accountNumberIn)
     WithdrawlLimit = 15;
     tempTime = transactionStorage.getFirstTime();
     currentTime = getTime();
-    if (((currentTime.month - tempTime.month) + (currentTime.year - tempTime.year)) > 0)
+    if (((currentTime.month - tempTime.month) + ((currentTime.year - tempTime.year)) * 12) > 0)
     {
-        balance += (InterestPercent * ((currentTime.month - tempTime.month) + (currentTime.year - tempTime.year)));
+        balance += (InterestPercent * ((currentTime.month - tempTime.month) + ((currentTime.year - tempTime.year)) * 12));
     }
 }
 
@@ -52,7 +52,7 @@ void Saving::deposit(double amount)
 {
     double pBal = amount;
     timeStruct storeTime = getTime();
-    balance = balance - amount;
+    balance = balance + amount;
     transactionStorage.deposit(storeTime, amount, accountNumber, pBal, balance);
 }
 
@@ -61,7 +61,7 @@ void Saving::menu()
     int choice;
     double amount;
     bool valid = true, exit = false;
-    while (exit)
+    while (!exit)
     {
         do
         {
@@ -70,25 +70,28 @@ void Saving::menu()
                 cout << "Please enter a valid selection.\n";
             }
             displayType();
-            cout << " account #" << accountNumber << "\nCurrent balance: " << balance << "\n";
+            cout << " account #" << accountNumber << "\nCurrent balance including interest: " << balance << "\n";
             cout << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - View past transactions"
                 << "\n4 - Exit to main menu\nChoice:";
             cin >> choice;
             switch (choice)
             {
             case 1:
+                cls();
                 cout << "Enter the amount you want to withdraw: ";
                 cin >> amount;
                 withdrawal(amount);
                 valid = true;
                 break;
             case 2:
+                cls();
                 cout << "Enter the amount you want to deposit: ";
                 cin >> amount;
                 deposit(amount);
                 valid = true;
                 break;
             case 3:
+                cls();
                 displayTransactions();
                 valid = true;
                 break;
@@ -99,6 +102,7 @@ void Saving::menu()
             default:
                 valid = false;
             }
+            cls();
         } while (!valid);
     }
 }

@@ -28,7 +28,7 @@ Base::Base(double bal, int accountNumberi)
         numWithdrawals = transactionStorage.numberOfWithdrawals();
     }*/
     transactionStorage.readAll();
-    transactionStorage.findAccountTransactions();
+    transactionStorage.findAccountTransactions(accountNumber);
     numWithdrawals = transactionStorage.numberOfWithdrawals();
 }
 
@@ -144,10 +144,8 @@ timeStruct Base::getTime()
 void Base::displayTransactions()
 {
     string ch;
-    //This works fine
     transactionStorage.readAll();
-    //The account number is what it should be here, but step into the function and it changes.
-    transactionStorage.findAccountTransactions();
+    transactionStorage.findAccountTransactions(accountNumber);
     transactionStorage.displayAccountTransactions();
 }
 
@@ -188,7 +186,6 @@ void Base::menu()
                 break;
             case 3:
                 cls();
-                //This is here the account number problem starts... Step into this function
                 displayTransactions();
                 valid = true;
                 break;

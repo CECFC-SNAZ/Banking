@@ -20,7 +20,7 @@ CD::CD(double bal, int accountNumberi) : Base(bal, accountNumberi)
 	{
 		depositWithdrawal = false;
 		transactionStorage.readAll();
-		transactionStorage.findAccountTransactions();
+		transactionStorage.findAccountTransactions(accountNumber);
 		entryTime = transactionStorage.getFirstTime();
 	}
 }
