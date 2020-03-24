@@ -143,7 +143,7 @@ void CD::menu()
 				cout << "Years: " << displayTime.year - tempTime.year << "  Months: " << displayTime.month - tempTime.month;
 					//<< "  Days: " << displayTime.day - tempTime.day << "  Hours: " << displayTime.hour - tempTime.hour;
 			}
-			cout << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
+			cout << "\n\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
 				<< "\n4 - Exit to main menu\nChoice: ";
 			cin >> choice;
 			switch (choice)

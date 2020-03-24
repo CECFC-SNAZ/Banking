@@ -164,8 +164,8 @@ void Base::menu()
             {
                 cout << "Invalid selection.\n\n";
             }
-            cout << "\nCurrent balance: " << balance << "\nNumber of withdrawals left: " << 500 - numWithdrawals
-                << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
+            cout << "\nCurrent balance: " << balance << "\nNumber of withdrawals left: " << withdrawLimit - numWithdrawals
+                << "\n\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
                 <<"\n4 - Exit to main menu\nChoice: ";
             cin >> choice;
             switch (choice)

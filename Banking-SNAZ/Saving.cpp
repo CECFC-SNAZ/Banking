@@ -26,7 +26,10 @@ Saving::Saving(double bal, int accountNumberIn, int interestTimes) : Base(bal, a
     {
         timesInterestApplied = interestTimes;
     }
-    WithdrawlLimit = 15;
+    withdrawLimit = 15;
+    transactionStorage.readAll();
+    transactionStorage.findAccountTransactions(accountNumber);
+    numWithdrawals = transactionStorage.numberOfWithdrawals();
     tempTime = transactionStorage.getFirstTime();
     currentTime = getTime();
     //To test monthly interest, uncomment the line below after making a deposit and restart the program.
@@ -47,7 +50,7 @@ bool Saving::withdrawal(double amount)
     string cont;
     float sBal = balance;
     timeStruct storeTime = getTime();
-    if ((balance - amount <= 0) || WithdrawlLimit <= 0)
+    if ((balance - amount <= 0) || withdrawLimit <= 0)
     {
         cout << " Error: Insufficient funds or you have reached the withdrawal limit \nPress \"Enter\" to continue: ";
         cin.ignore();
@@ -57,6 +60,7 @@ bool Saving::withdrawal(double amount)
     {
         balance -= amount;
         transactionStorage.withdrawal(storeTime, amount, accountNumber, sBal, balance);
+        numWithdrawals++;
         return true;
     }
     return false;
@@ -84,8 +88,9 @@ void Saving::menu()
                 cout << "Please enter a valid selection.\n";
             }
             displayType();
-            cout << " account #" << accountNumber << "\nCurrent balance including interest: " << balance << "\n";
-            cout << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - View past transactions"
+            cout << " account #" << accountNumber << "\nCurrent balance including interest: " << balance
+                << "\nNumber of withdrawals left: " << withdrawLimit - numWithdrawals
+                << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - View past transactions"
                 << "\n4 - Exit to main menu\nChoice:";
             cin >> choice;
             switch (choice)
