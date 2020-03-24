@@ -8,8 +8,13 @@ using namespace std;
 
 #define elif else if
 
+//Set to true to artificially advance time and test time based functions
+bool testTime = false;
+
 CD::CD(double bal, int accountNumberi) : Base(bal, accountNumberi)
 {
+	earlywithdrawfee = 100;
+	monthsUntilWithdrawal = 2;
 	withdrawLimit = 0;
 	if (bal <= 0)
 	{
@@ -36,6 +41,11 @@ bool CD::setMonthsUntilWithdrawal(int inp) {
 bool CD::isEarly() {
 	timeStruct nowTime, endTime;
 	nowTime = getTime();
+	if (testTime)
+	{
+		nowTime.month += 2;
+		//nowTime.day += 1;
+	}
 	endTime = getTimeStruct();
 	endTime.month += monthsUntilWithdrawal;
 	while (endTime.month > 12) {
@@ -97,12 +107,16 @@ void CD::menu()
 	int choice;
 	double amount;
 	bool valid = true, exit = false;
+	timeStruct displayTime;
 	displayType();
 	cout << " account #" << accountNumber;
 	while (!exit)
 	{
 		do
 		{
+			transactionStorage.readAll();
+			transactionStorage.findAccountTransactions(accountNumber);
+			entryTime = transactionStorage.getFirstTime();
 			if (!valid)
 			{
 				cout << "Invalid selection.\n\n";
@@ -110,7 +124,24 @@ void CD::menu()
 			cout << "\nCurrent balance: " << balance;
 			if (!depositWithdrawal)
 			{
-				cout << "Time until deposit maturity: ";
+				cout << "\nTime until deposit maturity: ";
+				transactionStorage.readAll();
+				transactionStorage.findAccountTransactions(accountNumber);
+				displayTime = transactionStorage.getFirstTime();
+				displayTime.month += monthsUntilWithdrawal;
+				while (displayTime.month > 12)
+				{
+					displayTime.month -= 12;
+					displayTime.year++;
+				}
+				timeStruct tempTime = getTime();
+				if (testTime)
+				{
+					tempTime.month += 2;
+					//tempTime.day += 1;
+				}
+				cout << "Years: " << displayTime.year - tempTime.year << "  Months: " << displayTime.month - tempTime.month;
+					//<< "  Days: " << displayTime.day - tempTime.day << "  Hours: " << displayTime.hour - tempTime.hour;
 			}
 			cout << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
 				<< "\n4 - Exit to main menu\nChoice: ";
@@ -129,6 +160,7 @@ void CD::menu()
 				else
 				{
 					cout << "\n\nA deposit must be made first.\nPress \"Enter\" to exit: ";
+					cin.ignore();
 					getline(cin, ch);
 				}
 				break;
