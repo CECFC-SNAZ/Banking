@@ -36,14 +36,14 @@ private:
 	struct activeAccount
 	{
 		string aname, ausername, apassword;
-		int aaccountNumber;
+		int aaccountNumber, timesInterestApplied[10];
 		double balance[10], amountOwed[10];
 		vector<accountID> aaccountIDs;
 	};
 	struct accountStorage
 	{
 		char sname[40], suserName[40], spassword[40];
-		int saccountNuber, index;
+		int saccountNuber, index, timesInterestApplied[10];
 		double balance[10], amountOwed[10];
 		accountID saccountIDs[10];
 		bool filled = false;

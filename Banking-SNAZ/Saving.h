@@ -14,13 +14,18 @@ class Saving : public Base
 private:
     float InterestPercent;
     float WithdrawlLimit;
+    int timesInterestApplied;
 public:
-    Saving(double bal, int accountNumberIn);
+    Saving(double bal, int accountNumberIn, int interestTimes);
     bool withdrawal(double amount);
     void deposit(double amount);
     void menu();
     void displayType()
     {
         cout << "Savings";
+    }
+    int getTimesInterestApplied() const
+    {
+        return timesInterestApplied;
     }
 };

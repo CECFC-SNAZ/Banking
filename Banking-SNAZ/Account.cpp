@@ -220,6 +220,7 @@ void Account::storeAccountInfo()
 		storeAccount.saccountIDs[i] = userAccount.aaccountIDs[i];
 		storeAccount.balance[i] = userAccount.balance[i];
 		storeAccount.amountOwed[i] = userAccount.amountOwed[i];
+		storeAccount.timesInterestApplied[i] = userAccount.timesInterestApplied[i];
 	}
 	storeAccount.filled = true;
 	accountsForStorage.push_back(storeAccount);
@@ -338,9 +339,10 @@ int Account::accessAccounts()
 		elif(userAccount.aaccountIDs[choice - 1].type == SAVINGS)
 		{
 			cls();
-			Saving saving(userAccount.balance[choice - 1], userAccount.aaccountIDs[choice - 1].IDnumber);
+			Saving saving(userAccount.balance[choice - 1], userAccount.aaccountIDs[choice - 1].IDnumber, userAccount.timesInterestApplied[choice - 1]);
 			saving.menu();
 			userAccount.balance[choice - 1] = saving.get_balance();
+			userAccount.timesInterestApplied[choice - 1] = saving.getTimesInterestApplied();
 		}
 		elif(userAccount.aaccountIDs[choice - 1].type == HELOC)
 		{

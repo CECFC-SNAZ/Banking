@@ -10,7 +10,7 @@ using namespace std;
 
 #define elif else if
 
-Saving::Saving(double bal, int accountNumberIn) : Base(bal, accountNumberIn)
+Saving::Saving(double bal, int accountNumberIn, int interestTimes) : Base(bal, accountNumberIn)
 {
     timeStruct tempTime, currentTime;
     InterestPercent = 0.09;
@@ -18,12 +18,27 @@ Saving::Saving(double bal, int accountNumberIn) : Base(bal, accountNumberIn)
     {
         balance = 0;
     }
+    if (interestTimes < 0)
+    {
+        timesInterestApplied = 0;
+    }
+    else
+    {
+        timesInterestApplied = interestTimes;
+    }
     WithdrawlLimit = 15;
     tempTime = transactionStorage.getFirstTime();
     currentTime = getTime();
-    if (((currentTime.month - tempTime.month) + ((currentTime.year - tempTime.year)) * 12) > 0)
+    //To test monthly interest, uncomment the line below after making a deposit and restart the program.
+    //currentTime.month += 1;
+    if (((currentTime.month - tempTime.month) + ((currentTime.year - tempTime.year)) * 12) > timesInterestApplied && tempTime.year >= 0)
     {
-        balance += (InterestPercent * ((currentTime.month - tempTime.month) + ((currentTime.year - tempTime.year)) * 12));
+
+        for (int i = 0; i < (((currentTime.month - tempTime.month) + ((currentTime.year - tempTime.year)) * 12) - timesInterestApplied); i++)
+        {
+            balance += (balance * InterestPercent);
+            timesInterestApplied++;
+        }
     }
 }
 
@@ -41,7 +56,6 @@ bool Saving::withdrawal(double amount)
     else
     {
         balance -= amount;
-        amount = amount + (amount * InterestPercent);
         transactionStorage.withdrawal(storeTime, amount, accountNumber, sBal, balance);
         return true;
     }
@@ -50,7 +64,7 @@ bool Saving::withdrawal(double amount)
 
 void Saving::deposit(double amount)
 {
-    double pBal = amount;
+    double pBal = balance;
     timeStruct storeTime = getTime();
     balance = balance + amount;
     transactionStorage.deposit(storeTime, amount, accountNumber, pBal, balance);
@@ -106,3 +120,4 @@ void Saving::menu()
         } while (!valid);
     }
 }
+
