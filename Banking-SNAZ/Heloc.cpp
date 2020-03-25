@@ -2,7 +2,7 @@
 Heloc.cpp
 Zach Partain
 6-3-2020
-Function definitios for the Heloc class
+Function definitions for the Heloc class
 */
 
 #include "Heloc.h"
@@ -31,7 +31,7 @@ bool Heloc::withdrawal(double amount)
     timeStruct storeTime = getTime();
         if ((balance - amount) <= 0 || amount > maxWithdrawAmount)
         {
-            cout << "Error, not enough funds for withdrawal or the maximum withdrawal amount was exceeded.\nPress \"Enter\"to countinue: ";
+            cout << "Error: not enough funds for withdrawal or the maximum withdrawal amount was exceeded.\nPress \"Enter\"to countinue: ";
             cin.ignore();
             getline(cin, ch);
         }

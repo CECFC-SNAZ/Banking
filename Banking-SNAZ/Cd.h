@@ -15,8 +15,9 @@ class CD : public Base {
 private:
 	timeStruct matureTime;
 	bool depositWithdrawal;
+	int timesInterestApplied;
 public:
-	CD(double bal, int accountNumberi);
+	CD(double bal, int accountNumberi, int innterestTimes);
 	void displayType() { cout << "CD"; }
 	bool setMonthsUntilWithdrawal(int);      // Returns false in the case of an error
 	bool isEarly();                          // Returns true if a withdrawal can be made without incuring an early withdrawal fee
@@ -25,6 +26,12 @@ public:
 
 	int getMonthsUntilWithdrawal() { return monthsUntilWithdrawal; }
 	void menu();
+	//Checks to see if interest should be applied, and applies it if necessary. Only applies interest once.
+	void applyInterest();
+	int getTimesInterestApplied() const
+	{
+		return timesInterestApplied;
+	}
 };
 
 #endif CD_H

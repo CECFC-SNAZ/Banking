@@ -50,7 +50,7 @@ bool Saving::withdrawal(double amount)
     string cont;
     float sBal = balance;
     timeStruct storeTime = getTime();
-    if ((balance - amount <= 0) || withdrawLimit <= 0)
+    if ((balance - amount <= 0) || numWithdrawals > withdrawLimit)
     {
         cout << " Error: Insufficient funds or you have reached the withdrawal limit \nPress \"Enter\" to continue: ";
         cin.ignore();
@@ -90,7 +90,7 @@ void Saving::menu()
             displayType();
             cout << " account #" << accountNumber << "\nCurrent balance including interest: " << balance
                 << "\nNumber of withdrawals left: " << withdrawLimit - numWithdrawals
-                << "\n1 - Withdraw funds\n2 - Deposit funds\n3 - View past transactions"
+                << "\n\n1 - Withdraw funds\n2 - Deposit funds\n3 - View past transactions"
                 << "\n4 - Exit to main menu\nChoice:";
             cin >> choice;
             switch (choice)

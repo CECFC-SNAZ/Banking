@@ -11,11 +11,17 @@ using namespace std;
 //Set to true to artificially advance time and test time based functions
 bool testTime = false;
 
-CD::CD(double bal, int accountNumberi) : Base(bal, accountNumberi)
+CD::CD(double bal, int accountNumberi, int interestTimes) : Base(bal, accountNumberi)
 {
 	earlywithdrawfee = 100;
 	monthsUntilWithdrawal = 2;
 	withdrawLimit = 0;
+	timesInterestApplied = interestTimes;
+	annualInterestRate = 0.0175;
+	if (timesInterestApplied < 0)
+	{
+		timesInterestApplied = 0;
+	}
 	if (bal <= 0)
 	{
 		bal = 0;
@@ -114,6 +120,7 @@ void CD::menu()
 	{
 		do
 		{
+			applyInterest();
 			transactionStorage.readAll();
 			transactionStorage.findAccountTransactions(accountNumber);
 			entryTime = transactionStorage.getFirstTime();
@@ -195,5 +202,17 @@ void CD::menu()
 			}
 			cls();
 		} while (!valid);
+	}
+}
+
+void CD::applyInterest()
+{
+	if (!timesInterestApplied > 0)
+	{
+		if (!isEarly())
+		{
+			balance += (balance * annualInterestRate);
+			timesInterestApplied++;
+		}
 	}
 }

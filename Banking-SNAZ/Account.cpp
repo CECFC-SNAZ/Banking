@@ -298,7 +298,7 @@ int Account::accessAccounts()
 		}
 		while ((choice - 1) < 0 || (choice - 1) > index + 2)
 		{
-			cout << "Select an account to access or enter " << index + 2 << " to exit: ";
+			cout << "Select an account to access or enter " << index + 2 << " to logout: ";
 			cin >> choice;
 			if ((choice - 1) < 0 || (choice - 1) > index + 2)
 			{
@@ -309,6 +309,7 @@ int Account::accessAccounts()
 		{
 			storeAccountInfo();
 			saveAccounts();
+			cls();
 			return 0;
 		}
 		switch (userAccount.aaccountIDs[choice - 1].type)
@@ -355,9 +356,10 @@ int Account::accessAccounts()
 		elif(userAccount.aaccountIDs[choice - 1].type == Cd)
 		{
 			cls();
-			CD cd(userAccount.balance[choice - 1], userAccount.aaccountIDs[choice - 1].IDnumber);
+			CD cd(userAccount.balance[choice - 1], userAccount.aaccountIDs[choice - 1].IDnumber, userAccount.timesInterestApplied[choice - 1]);
 			cd.menu();
 			userAccount.balance[choice - 1] = cd.get_balance();
+			userAccount.timesInterestApplied[choice - 1] = cd.getTimesInterestApplied();
 		}
 	}
 }

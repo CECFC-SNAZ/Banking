@@ -2,7 +2,7 @@
 /*BaseClass.h
 by Sedona Dionne
 February 28, 2020
-Struct stores time of entry.  Base Class includes fees, interest rate, and a withdrawal limit.
+Base Class includes fees, interest rates, and withdrawal limits.
 */
 
 #include "Transaction.h"
@@ -11,10 +11,6 @@ Struct stores time of entry.  Base Class includes fees, interest rate, and a wit
 #include <iostream>
 #include <ctime>
 using namespace std;
-struct entrystruct {
-    int tm_min, tm_hour, tm_mday, tm_mon, tm_year;
-};
-
 
 class Base {
 protected:
@@ -39,23 +35,15 @@ public:
     {
         return balance;
     }
-    void calcDeposit(double);
-    void calcCheck(double);
     //Determines the fee owed on an overdraft and applies this fee
     void calcOverdraft(double);
-    void calcLate(double);
-    void calcEarlywithdraw(double);
-    void calcMonthInt();
     //Set the interest rate for an account
     void setIntRate(double rate)
     {
         annualInterestRate = rate;
     }
-    void displayFee();
     void setEntryTime(timeStruct enteredtime) { entryTime = enteredtime; }
    timeStruct getEntryTime() { return entryTime; }
-
-
    //Set the initial overdraft fee and overdraft interest rate (interest rate is ideally 10% - 20%)
    void setOverdraft(double fee, double interest);
    //Set the withdraw limit for the account.

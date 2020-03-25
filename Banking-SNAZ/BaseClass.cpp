@@ -17,16 +17,6 @@ Base::Base(double bal, int accountNumberi)
     entryTime.day = 0;
     entryTime.month = 0;
     entryTime.year = 0;
-    /*if (bal <= 0)
-    {
-        bal = 0;
-    }
-    elif(bal >= 1)
-    {
-        transactionStorage.readAll();
-        transactionStorage.findAccountTransactions();
-        numWithdrawals = transactionStorage.numberOfWithdrawals();
-    }*/
     transactionStorage.readAll();
     transactionStorage.findAccountTransactions(accountNumber);
     numWithdrawals = transactionStorage.numberOfWithdrawals();
@@ -41,6 +31,8 @@ bool Base::withdrawal(double amount)
         if ((balance - amount) < 0 && numWithdrawals < withdrawLimit)
         {
             calcOverdraft(amount - balance);
+            pBal = balance;
+            balance -= amount;
             transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
             numWithdrawals++;
             return true;
@@ -59,6 +51,8 @@ bool Base::withdrawal(double amount)
         if ((balance - amount) < 0)
         {
             calcOverdraft(amount - balance);
+            pBal = balance;
+            balance -= amount;
             transactionStorage.withdrawal(storeTime, amount, accountNumber, pBal, balance);
             numWithdrawals++;
             return true;
@@ -82,36 +76,12 @@ void Base::deposit(double amount)
     transactionStorage.deposit(storeTime, amount, accountNumber, pBal, balance);
 }
 
-void Base::calcDeposit(double)
-{
-}
-
-void Base::calcCheck(double)
-{
-}
-
 void Base::calcOverdraft(double overdraft)
 {
     double pBal = balance;
     timeStruct storeTime = getTime();
     balance -= (overdraft + overdraftfee + (overdraft * overdraftInterest));
     transactionStorage.fee(storeTime, (overdraft + overdraftfee + (overdraft * overdraftInterest)), accountNumber, pBal, balance);
-}
-
-void Base::calcLate(double)
-{
-}
-
-void Base::calcEarlywithdraw(double)
-{
-}
-
-void Base::calcMonthInt()
-{
-}
-
-void Base::displayFee()
-{
 }
 
 void Base::setOverdraft(double fee, double interest)
@@ -164,8 +134,7 @@ void Base::menu()
             {
                 cout << "Invalid selection.\n\n";
             }
-            cout << "\nCurrent balance: " << balance << "\nNumber of withdrawals left: " << withdrawLimit - numWithdrawals
-                << "\n\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
+            cout << "\nCurrent balance: " << balance << "\n\n1 - Withdraw funds\n2 - Deposit funds\n3 - Veiw past transactions"
                 <<"\n4 - Exit to main menu\nChoice: ";
             cin >> choice;
             switch (choice)

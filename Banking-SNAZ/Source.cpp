@@ -1,6 +1,7 @@
 // Source.cpp
 // Team SNAZ
 // 2 March 2020
+// Banking program
 
 
 #include "Transaction.h"
@@ -18,10 +19,6 @@ int main() {
 		Transaction tmpTrans;
 		if (not tmpTrans.test()) cout << "Error with transaction file I/O\n";
 	}
-	/*Transaction transaction;
-
-	cout << "\n\n\n" << sizeof(transaction) << "\n\n\n";*/
-
 
 	bool valid = true, exit = false;
 	int choice;
@@ -30,6 +27,10 @@ int main() {
 	{
 		do
 		{
+			if (account.checkFile("userAccounts.dat"))
+			{
+				account.useSaved();
+			}
 			if (!valid)
 			{
 				cout << "Invalid selection.\n\n";
